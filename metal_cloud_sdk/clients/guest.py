@@ -2352,8 +2352,10 @@ class Guest(Client):
 			strContainerArrayID,
 		]
 
-		return self.rpc("container_array_drive_arrays", arrParams)
-
+		objDriveArray = self.rpc("container_array_drive_arrays", arrParams)
+		for strKeyDriveArray in objDriveArray:
+			objDriveArray[strKeyDriveArray] = Deserializer.deserialize(objDriveArray[strKeyDriveArray])
+		return objDriveArray
 
 	def container_cluster_app(self, strContainerClusterID, bAccessSaaSAPI = True, nAccessSaaSAPITimeoutSeconds = 10):
 
@@ -2414,16 +2416,17 @@ class Guest(Client):
 
 		return Deserializer.deserialize(self.rpc("dataset_create", arrParams))
 
-	def dataset_edit(self, nDatasetID, objChangedDataset):
+	def dataset_edit(self, nDatasetID, nTemporaryUploadID, objChangedDataset):
 
 		objChangedDataset = Serializer.serialize(objChangedDataset)
 
 		arrParams = [
 			nDatasetID,
+			nTemporaryUploadID,
 			objChangedDataset,
 		]
 
-		self.rpc("dataset_edit", arrParams)
+		return self.rpc("dataset_edit", arrParams)
 
 
 	def dataset_delete(self, nDatasetID):
