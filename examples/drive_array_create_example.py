@@ -16,7 +16,7 @@ dictDriveArrayParams = {
   "drive_array_expand_with_instance_array" : True
 }
 
-strOSTemplate = "centos7-5"
+strOSTemplate = "centos71v1"
 dictAvailableTemplates = bsi.volume_templates_public()
 for i in dictAvailableTemplates.keys():
 	if strOSTemplate == i:

@@ -12,7 +12,7 @@ strUserID = "your_login_email@goes.here"
 
 # select the datacenter where the infrastructure will be created
 dictDatacenters = bsi.datacenters()
-strDatacenter = dictDatacenters.keys()[0]
+strDatacenter =  dictDatacenters.keys()[0]
     
 # setting up the infrastructure object parameter
 dictInfrastructureCreateParams = {
