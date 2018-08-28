@@ -2,7 +2,7 @@ import sys
 import os.path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from metal_cloud_sdk.clients.bsi import BSI
+from metal_cloud_sdk.clients.api import API
 from jsonrpc2_base.plugins.client.signature_add import SignatureAdd
 from jsonrpc2_base.plugins.client.debug_logger import DebugLogger
 
@@ -20,7 +20,7 @@ class BSIClient(object):
         """
         Instantiate the Python Client.
         """
-        bsi = BSI.getInstance(
+        bsi = API.getInstance(
             dictParams,
             [
                 SignatureAdd(strAPIKey, {}),

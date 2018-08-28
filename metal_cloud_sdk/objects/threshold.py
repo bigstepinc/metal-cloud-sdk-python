@@ -6,8 +6,9 @@ class Threshold(object):
 	owner would be notified.
 	"""
 
-	def __init__(self):
-		pass;
+	def __init__(self, threshold_value, threshold_type):
+		self.threshold_value = threshold_value;
+		self.threshold_type = threshold_type;
 
 
 	"""
@@ -18,7 +19,7 @@ class Threshold(object):
 	"""
 	The ID of the user
 	"""
-	user_id = None;
+	user_id_owner = None;
 
 	"""
 	The ID of the infrastructure
@@ -26,25 +27,52 @@ class Threshold(object):
 	infrastructure_id = None;
 
 	"""
-	The currency for the amount is the same as the pricing currency for the
-	user's franchise
+	The ID of the network
 	"""
-	threshold_cost = 0;
+	network_id = None;
 
 	"""
-	The period of time that must pass before another warning is issued
+	A string which provides a description of the threshold.
 	"""
-	threshold_action_repeat_interval = "never";
+	threshold_description = "";
+
+	"""
+	The value for the threshold
+	"""
+	threshold_value = None;
+
+	"""
+	The measurement unit associated with the threshold value
+	"""
+	threshold_unit = None;
+
+	"""
+	The period of time in hours that must pass before another warning is issued.
+	For a one time warning, null is required
+	"""
+	threshold_action_repeat_interval_hours = 0;
 
 	"""
 	How is the threshold calculated
 	"""
-	threshold_type = "infrastructure_ondemand_and_metered_costs";
+	threshold_type = None;
 
 	"""
 	What action to be taken when the threshold is exceeded
 	"""
 	threshold_action = "email";
+
+	"""
+	Defines whether the event must be triggered when the measured value is
+	greater than or less than the threashold_value
+	"""
+	threshold_bound_type = "upper";
+
+	"""
+	Defines the destination for the threshold value. It can be seen as a subtype
+	of the threshold_type
+	"""
+	threshold_value_destination = None;
 
 	"""
 	The schema type.

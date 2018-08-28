@@ -18,6 +18,7 @@ setup(
     install_requires = [ 'jsonrpc2-base==1.2' ],
     classifiers=[
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.6',
     ]
 )

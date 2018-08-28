@@ -9,7 +9,7 @@ bsi = BSIClient.init()
 # get a list of all the drives, by ID, in a specific drive array
 # as well as the ID of the instance each drive is attached to
 dictDriveArray = bsi.drive_array_get("drive-array-label")
-nDriveArrayID = dictDriveArray["drive_array_id"]
+nDriveArrayID = dictDriveArray.drive_array_id
 strQuery = (
     "SELECT drive_id, instance_id "
     "FROM drives "

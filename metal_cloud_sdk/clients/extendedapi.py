@@ -25,7 +25,7 @@ class ExtendedAPI(Client):
 		return ExtendedAPI.__instance
 
 
-	""" 254 functions available on endpoint. """
+	""" 263 functions available on endpoint. """
 
 	def cluster_create(self, strInfrastructureID, objCluster):
 
@@ -2356,8 +2356,10 @@ class ExtendedAPI(Client):
 			strContainerArrayID,
 		]
 
-		return self.rpc("container_array_drive_arrays", arrParams)
-
+		objDriveArray = self.rpc("container_array_drive_arrays", arrParams)
+		for strKeyDriveArray in objDriveArray:
+			objDriveArray[strKeyDriveArray] = Deserializer.deserialize(objDriveArray[strKeyDriveArray])
+		return objDriveArray
 
 	def container_cluster_app(self, strContainerClusterID, bAccessSaaSAPI = True, nAccessSaaSAPITimeoutSeconds = 10):
 
@@ -2501,36 +2503,35 @@ class ExtendedAPI(Client):
 
 		return Deserializer.deserialize(self.rpc("dataset_create", arrParams))
 
-	def dataset_publish(self, strUserIDOwner, nDatasetID):
+	def dataset_publish(self, nDatasetID):
 
 		arrParams = [
-			strUserIDOwner,
 			nDatasetID,
 		]
 
 		self.rpc("dataset_publish", arrParams)
 
 
-	def dataset_unpublish(self, strUserIDOwner, nDatasetID):
+	def dataset_unpublish(self, nDatasetID):
 
 		arrParams = [
-			strUserIDOwner,
 			nDatasetID,
 		]
 
 		self.rpc("dataset_unpublish", arrParams)
 
 
-	def dataset_edit(self, nDatasetID, objChangedDataset):
+	def dataset_edit(self, nDatasetID, nTemporaryUploadID, objChangedDataset):
 
 		objChangedDataset = Serializer.serialize(objChangedDataset)
 
 		arrParams = [
 			nDatasetID,
+			nTemporaryUploadID,
 			objChangedDataset,
 		]
 
-		self.rpc("dataset_edit", arrParams)
+		return self.rpc("dataset_edit", arrParams)
 
 
 	def dataset_datapackage_get(self, nDatasetID):
@@ -2616,4 +2617,86 @@ class ExtendedAPI(Client):
 
 		return self.rpc("support_ticket_options", arrParams)
 
+
+	def server_instance_oob_allowed_ips(self, strInstanceID):
+
+		arrParams = [
+			strInstanceID,
+		]
+
+		return self.rpc("server_instance_oob_allowed_ips", arrParams)
+
+
+	def server_instance_oob_allow_ip(self, strInstanceID, strAllowedIP):
+
+		arrParams = [
+			strInstanceID,
+			strAllowedIP,
+		]
+
+		self.rpc("server_instance_oob_allow_ip", arrParams)
+
+
+	def server_instance_oob_disallow_ip(self, strInstanceID, strDisallowedIP):
+
+		arrParams = [
+			strInstanceID,
+			strDisallowedIP,
+		]
+
+		self.rpc("server_instance_oob_disallow_ip", arrParams)
+
+
+	def drive_array_filesystem_types_available(self):
+
+		arrParams = [
+		]
+
+		return self.rpc("drive_array_filesystem_types_available", arrParams)
+
+
+	def drive_array_block_sizes_available(self):
+
+		arrParams = [
+		]
+
+		return self.rpc("drive_array_block_sizes_available", arrParams)
+
+
+	def dataset_readme_upload_url(self):
+
+		arrParams = [
+		]
+
+		return self.rpc("dataset_readme_upload_url", arrParams)
+
+
+	def dataset_readme_download_url(self, nPublicDatasetID):
+
+		arrParams = [
+			nPublicDatasetID,
+		]
+
+		return self.rpc("dataset_readme_download_url", arrParams)
+
+
+	def dataset_readme_delete(self, nDatasetID):
+
+		arrParams = [
+			nDatasetID,
+		]
+
+		self.rpc("dataset_readme_delete", arrParams)
+
+
+	def instance_array_drive_arrays(self, strInstanceArrayID):
+
+		arrParams = [
+			strInstanceArrayID,
+		]
+
+		objDriveArray = self.rpc("instance_array_drive_arrays", arrParams)
+		for strKeyDriveArray in objDriveArray:
+			objDriveArray[strKeyDriveArray] = Deserializer.deserialize(objDriveArray[strKeyDriveArray])
+		return objDriveArray
 
