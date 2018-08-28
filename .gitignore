@@ -1,0 +1,14 @@
+*.pyc
+*.dll
+*.pyc
+LOG/*
+*.dll
+LOG/*
+index.html
+logger.txt
+
+dist/*
+examples/Communication.log
+
+# for Pycharm
+.idea/*

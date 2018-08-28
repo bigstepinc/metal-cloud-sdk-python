@@ -1,0 +1,2 @@
+jsonrpc2_base == 1.2
+six == 1.11.0
