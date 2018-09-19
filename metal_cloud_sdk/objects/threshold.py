@@ -6,9 +6,10 @@ class Threshold(object):
 	owner would be notified.
 	"""
 
-	def __init__(self, threshold_value, threshold_type):
+	def __init__(self, infrastructure_id, threshold_value, threshold_unit):
+		self.infrastructure_id = infrastructure_id;
 		self.threshold_value = threshold_value;
-		self.threshold_type = threshold_type;
+		self.threshold_unit = threshold_unit;
 
 
 	"""
@@ -17,7 +18,7 @@ class Threshold(object):
 	threshold_id = None;
 
 	"""
-	The ID of the user
+	The ID of the user that owns the threshold
 	"""
 	user_id_owner = None;
 
@@ -55,7 +56,7 @@ class Threshold(object):
 	"""
 	How is the threshold calculated
 	"""
-	threshold_type = None;
+	threshold_type = "infrastructure_on_demand_and_metered_costs";
 
 	"""
 	What action to be taken when the threshold is exceeded
@@ -64,7 +65,7 @@ class Threshold(object):
 
 	"""
 	Defines whether the event must be triggered when the measured value is
-	greater than or less than the threashold_value
+	greater than or less than the threshold_value
 	"""
 	threshold_bound_type = "upper";
 
@@ -72,7 +73,7 @@ class Threshold(object):
 	Defines the destination for the threshold value. It can be seen as a subtype
 	of the threshold_type
 	"""
-	threshold_value_destination = None;
+	threshold_value_destination = "infrastructure_total_costs";
 
 	"""
 	The schema type.

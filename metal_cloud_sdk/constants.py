@@ -5,7 +5,7 @@ import importlib
 class Constants(object):
 
 	"""
-	* Metal Cloud, API v3.0
+	* Metal Cloud, API v2.16
 	"""
 	
 	
@@ -475,46 +475,6 @@ class Constants(object):
 	
 	
 	"""
-	EXT2 filesystem.
-	
-	
-	"""
-	FILESYSTEM_TYPE_EXT2="ext2"
-	
-	
-	"""
-	EXT3 filesystem.
-	
-	
-	"""
-	FILESYSTEM_TYPE_EXT3="ext3"
-	
-	
-	"""
-	EXT4 filesystem.
-	
-	
-	"""
-	FILESYSTEM_TYPE_EXT4="ext4"
-	
-	
-	"""
-	None filesystem.
-	
-	Value used when no file system is specified.
-	"""
-	FILESYSTEM_TYPE_NONE="none"
-	
-	
-	"""
-	XFS filesystem.
-	
-	
-	"""
-	FILESYSTEM_TYPE_XFS="xfs"
-	
-	
-	"""
 	FirewallRule IPV4.
 	
 	
@@ -632,22 +592,6 @@ class Constants(object):
 	
 	"""
 	INSTANCE_ARRAY_INTERFACE_INDEX_3=3
-	
-	
-	"""
-	IPv4 IP.
-	
-	
-	"""
-	IP_TYPE_IPV4="ipv4"
-	
-	
-	"""
-	IPv6 IP.
-	
-	
-	"""
-	IP_TYPE_IPV6="ipv6"
 	
 	
 	"""

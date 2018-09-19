@@ -1,5 +1,5 @@
 """
-* Metal Cloud, API v3.0"""
+* Metal Cloud, API v2.16"""
 class Events(object):
 
 
@@ -32,57 +32,12 @@ class Events(object):
 
 
 	"""
-	Agent drive partition finished.
-	Severity: success.
-	
-	Agent drive partitioning has finished on all instances.
-	"""
-	BSI_AGENT_DRIVE_PARTITION_FINISHED=396
-
-
-	"""
-	Agent drive partition format finished.
-	Severity: success.
-	
-	Agent drive partition formatting has finished on all instances.
-	"""
-	BSI_AGENT_DRIVE_PARTITION_FORMAT_FINISHED=397
-
-
-	"""
-	Agent drive partition mount finished.
-	Severity: success.
-	
-	Drive partition mounting has finished on all instances.
-	"""
-	BSI_AGENT_DRIVE_PARTITION_MOUNT_FINISHED=398
-
-
-	"""
-	Agent drive partition unmount finished.
-	Severity: success.
-	
-	Drive partition unmount has finished on all instances.
-	"""
-	BSI_AGENT_DRIVE_PARTITION_UNMOUNT_FINISHED=399
-
-
-	"""
 	BSI Agent Installed.
 	Severity: success.
 	
 	BSI Agent has been successfully installed on all instances.
 	"""
 	BSI_AGENT_INSTALLED=276
-
-
-	"""
-	Agent iSCSI setup finished.
-	Severity: success.
-	
-	iSCSI setup and login has successfully finished on all instances.
-	"""
-	BSI_AGENT_ISCSI_SETUP_FINISHED=395
 
 
 	"""
