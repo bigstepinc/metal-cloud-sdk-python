@@ -25,7 +25,7 @@ class Guest(Client):
 		return Guest.__instance
 
 
-	""" 249 functions available on endpoint. """
+	""" 271 functions available on endpoint. """
 
 	def cluster_create(self, strInfrastructureID, objCluster):
 
@@ -2477,12 +2477,10 @@ class Guest(Client):
 
 		return Deserializer.deserialize(self.rpc("datacenter_get", arrParams))
 
-	def infrastructure_overview_children_products(self, strInfrastructureID, bAccessSaaSAPI = True, nAccessSaaSAPITimeoutSeconds = 10):
+	def infrastructure_overview_children_products(self, strInfrastructureID):
 
 		arrParams = [
 			strInfrastructureID,
-			bAccessSaaSAPI,
-			nAccessSaaSAPITimeoutSeconds,
 		]
 
 		return self.rpc("infrastructure_overview_children_products", arrParams)
@@ -2506,17 +2504,6 @@ class Guest(Client):
 		return self.rpc("license_types_for_volume_template", arrParams)
 
 
-	def published_datasets_updated(self, strMaintainerUserID):
-
-		arrParams = [
-			strMaintainerUserID,
-		]
-
-		arrDatasets = self.rpc("published_datasets_updated", arrParams)
-		for index in range(len(arrDatasets)):
-			arrDatasets[index] = Deserializer.deserialize(arrDatasets[index])
-		return arrDatasets
-
 	def datacenter_datasets(self, strDatacenterLabel):
 
 		arrParams = [
@@ -2537,32 +2524,6 @@ class Guest(Client):
 		return self.rpc("user_datasets_managed", arrParams)
 
 
-	def datastore_publishers(self):
-
-		arrParams = [
-		]
-
-		self.rpc("datastore_publishers", arrParams)
-
-
-	def datastore_publisher_create(self, nPublisherUserID):
-
-		arrParams = [
-			nPublisherUserID,
-		]
-
-		self.rpc("datastore_publisher_create", arrParams)
-
-
-	def datastore_publisher_delete(self, nDatastorePublisherID):
-
-		arrParams = [
-			nDatastorePublisherID,
-		]
-
-		self.rpc("datastore_publisher_delete", arrParams)
-
-
 	def support_ticket_options(self, strUserLanguage):
 
 		arrParams = [
@@ -2570,5 +2531,252 @@ class Guest(Client):
 		]
 
 		return self.rpc("support_ticket_options", arrParams)
+
+
+	def cluster_instance_arrays(self, strClusterID, arrInstanceArrayIDs = None):
+
+		arrParams = [
+			strClusterID,
+			arrInstanceArrayIDs,
+		]
+
+		objInstanceArray = self.rpc("cluster_instance_arrays", arrParams)
+		for strKeyInstanceArray in objInstanceArray:
+			objInstanceArray[strKeyInstanceArray] = Deserializer.deserialize(objInstanceArray[strKeyInstanceArray])
+		return objInstanceArray
+
+	def container_status(self, strContainerID):
+
+		arrParams = [
+			strContainerID,
+		]
+
+		return Deserializer.deserialize(self.rpc("container_status", arrParams))
+
+	def container_array_status(self, strContainerArrayID):
+
+		arrParams = [
+			strContainerArrayID,
+		]
+
+		return Deserializer.deserialize(self.rpc("container_array_status", arrParams))
+
+	def container_cluster_container_arrays(self, strContainerClusterID, arrContainerArrayIDs = None):
+
+		arrParams = [
+			strContainerClusterID,
+			arrContainerArrayIDs,
+		]
+
+		objContainerArray = self.rpc("container_cluster_container_arrays", arrParams)
+		for strKeyContainerArray in objContainerArray:
+			objContainerArray[strKeyContainerArray] = Deserializer.deserialize(objContainerArray[strKeyContainerArray])
+		return objContainerArray
+
+	def instance_array_drive_arrays(self, strInstanceArrayID):
+
+		arrParams = [
+			strInstanceArrayID,
+		]
+
+		objDriveArray = self.rpc("instance_array_drive_arrays", arrParams)
+		for strKeyDriveArray in objDriveArray:
+			objDriveArray[strKeyDriveArray] = Deserializer.deserialize(objDriveArray[strKeyDriveArray])
+		return objDriveArray
+
+	def ip_custom_reverse_records(self, strInfrastructureID):
+
+		arrParams = [
+			strInfrastructureID,
+		]
+
+		return self.rpc("ip_custom_reverse_records", arrParams)
+
+
+	def ip_custom_reverse_record_remove(self, strInfrastructureID, strIPAddress):
+
+		arrParams = [
+			strInfrastructureID,
+			strIPAddress,
+		]
+
+		self.rpc("ip_custom_reverse_record_remove", arrParams)
+
+
+	def ip_custom_reverse_record_add(self, strInfrastructureID, strIPAddress, strSubdomainName, strRootDomain):
+
+		arrParams = [
+			strInfrastructureID,
+			strIPAddress,
+			strSubdomainName,
+			strRootDomain,
+		]
+
+		self.rpc("ip_custom_reverse_record_add", arrParams)
+
+
+	def infrastructure_lan_subnet_pools_available(self, nInfrastructureID):
+
+		arrParams = [
+			nInfrastructureID,
+		]
+
+		return self.rpc("infrastructure_lan_subnet_pools_available", arrParams)
+
+
+	def infrastructure_lan_subnet_prefixes_available(self, nInfrastructureID):
+
+		arrParams = [
+			nInfrastructureID,
+		]
+
+		return self.rpc("infrastructure_lan_subnet_prefixes_available", arrParams)
+
+
+	def server_instance_oob_allowed_ips(self, strInstanceID):
+
+		arrParams = [
+			strInstanceID,
+		]
+
+		return self.rpc("server_instance_oob_allowed_ips", arrParams)
+
+
+	def server_instance_oob_allow_ip(self, strInstanceID, strAllowedIP):
+
+		arrParams = [
+			strInstanceID,
+			strAllowedIP,
+		]
+
+		self.rpc("server_instance_oob_allow_ip", arrParams)
+
+
+	def server_instance_oob_disallow_ip(self, strInstanceID, strDisallowedIP):
+
+		arrParams = [
+			strInstanceID,
+			strDisallowedIP,
+		]
+
+		self.rpc("server_instance_oob_disallow_ip", arrParams)
+
+
+	def drive_array_filesystem_types_available(self):
+
+		arrParams = [
+		]
+
+		return self.rpc("drive_array_filesystem_types_available", arrParams)
+
+
+	def drive_array_block_sizes_available(self):
+
+		arrParams = [
+		]
+
+		return self.rpc("drive_array_block_sizes_available", arrParams)
+
+
+	def dataset_publish(self, nDatasetID):
+
+		arrParams = [
+			nDatasetID,
+		]
+
+		self.rpc("dataset_publish", arrParams)
+
+
+	def dataset_unpublish(self, nDatasetID):
+
+		arrParams = [
+			nDatasetID,
+		]
+
+		self.rpc("dataset_unpublish", arrParams)
+
+
+	def dataset_datapackage_get(self, nDatasetID):
+
+		arrParams = [
+			nDatasetID,
+		]
+
+		return Deserializer.deserialize(self.rpc("dataset_datapackage_get", arrParams))
+
+	def dataset_readme_upload_url(self):
+
+		arrParams = [
+		]
+
+		return self.rpc("dataset_readme_upload_url", arrParams)
+
+
+	def dataset_readme_download_url(self, nPublicDatasetID):
+
+		arrParams = [
+			nPublicDatasetID,
+		]
+
+		return self.rpc("dataset_readme_download_url", arrParams)
+
+
+	def dataset_readme_delete(self, nDatasetID):
+
+		arrParams = [
+			nDatasetID,
+		]
+
+		self.rpc("dataset_readme_delete", arrParams)
+
+
+	def threshold_create(self, strUserIDOwner, objThreshold):
+
+		objThreshold = Serializer.serialize(objThreshold)
+
+		arrParams = [
+			strUserIDOwner,
+			objThreshold,
+		]
+
+		return Deserializer.deserialize(self.rpc("threshold_create", arrParams))
+
+	def thresholds(self, strUserIDOwner):
+
+		arrParams = [
+			strUserIDOwner,
+		]
+
+		arrThresholds = self.rpc("thresholds", arrParams)
+		for index in range(len(arrThresholds)):
+			arrThresholds[index] = Deserializer.deserialize(arrThresholds[index])
+		return arrThresholds
+
+	def threshold_edit(self, nThresholdID, objThresholdOperation):
+
+		objThresholdOperation = Serializer.serialize(objThresholdOperation)
+
+		arrParams = [
+			nThresholdID,
+			objThresholdOperation,
+		]
+
+		return Deserializer.deserialize(self.rpc("threshold_edit", arrParams))
+
+	def threshold_get(self, nThresholdID):
+
+		arrParams = [
+			nThresholdID,
+		]
+
+		return Deserializer.deserialize(self.rpc("threshold_get", arrParams))
+
+	def threshold_delete(self, nThresholdID):
+
+		arrParams = [
+			nThresholdID,
+		]
+
+		self.rpc("threshold_delete", arrParams)
 
 

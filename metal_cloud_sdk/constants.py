@@ -5,7 +5,7 @@ import importlib
 class Constants(object):
 
 	"""
-	* Metal Cloud, API v3.0
+	* Metal Cloud, API v3.1
 	"""
 	
 	
@@ -1392,6 +1392,14 @@ class Constants(object):
 	
 	"""
 	USER_SUSPEND_REASON_UNPAID="unpaid"
+	
+	
+	"""
+	User test account keyword identifier.
+	
+	It is used to identify the erasable test accounts.
+	"""
+	USER_TEST_ACCOUNT_KEYWORD="_erasable_"
 	
 	
 	"""

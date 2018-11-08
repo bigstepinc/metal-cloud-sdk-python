@@ -1,5 +1,5 @@
 """
-* Metal Cloud, API v3.0"""
+* Metal Cloud, API v3.1"""
 class Events(object):
 
 
@@ -1631,6 +1631,51 @@ class Events(object):
 	Primary WAN IPv4 subnet was allocated for a network from the infrastructure switches.
 	"""
 	SWITCH_DEVICE_NETWORK_ALLOCATED_PRIMARY_SUBNET=338
+
+
+	"""
+	Threshold created.
+	Severity: info.
+	
+	A threshold was created.
+	"""
+	THRESHOLD_CREATED=401
+
+
+	"""
+	Threshold deleted.
+	Severity: info.
+	
+	A threshold was deleted.
+	"""
+	THRESHOLD_DELETED=405
+
+
+	"""
+	Threshold edited.
+	Severity: info.
+	
+	A threshold was edited.
+	"""
+	THRESHOLD_EDITED=402
+
+
+	"""
+	Threshold infrastructure on-demand and metered costs notification sent.
+	Severity: info.
+	
+	A notification was sent to a user for a threshold of type infrastructure_on_demand_and_metered_costs.
+	"""
+	THRESHOLD_INFRASTRUCTURE_ON_DEMAND_AND_METERED_COSTS_NOTIFICATION_SENT=404
+
+
+	"""
+	Threshold network traffic per billing cycle notification sent.
+	Severity: info.
+	
+	A notification was sent to a user for a network traffic threshold.
+	"""
+	THRESHOLD_NETWORK_TRAFFIC_NOTIFICATION_SENT=403
 
 
 	"""

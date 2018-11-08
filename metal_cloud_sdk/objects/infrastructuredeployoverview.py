@@ -15,6 +15,12 @@ class InfrastructureDeployOverview(object):
 	unusedServerTypeReservations = [];
 
 	"""
+	If this is true, it means that strictly only firewall changes will be
+	deployed and nothing else, meaning a very short deploy will happen.
+	"""
+	isOnlyFirewallDeploy = None;
+
+	"""
 	Licenses which are created, reassigned or unused.
 	"""
 	licenses = [];

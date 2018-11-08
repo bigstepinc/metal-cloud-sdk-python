@@ -25,7 +25,7 @@ class API(Client):
 		return API.__instance
 
 
-	""" 243 functions available on endpoint. """
+	""" 239 functions available on endpoint. """
 
 	def cluster_create(self, strInfrastructureID, objCluster):
 
@@ -2046,17 +2046,6 @@ class API(Client):
 
 		return Deserializer.deserialize(self.rpc("drive_detach_container", arrParams))
 
-	def infrastructure_overview_children_products(self, strInfrastructureID, bAccessSaaSAPI = True, nAccessSaaSAPITimeoutSeconds = 10):
-
-		arrParams = [
-			strInfrastructureID,
-			bAccessSaaSAPI,
-			nAccessSaaSAPITimeoutSeconds,
-		]
-
-		return self.rpc("infrastructure_overview_children_products", arrParams)
-
-
 	def datacenter_get(self, strUserID, strDatacenterName):
 
 		arrParams = [
@@ -2373,30 +2362,6 @@ class API(Client):
 			objContainerArray[strKeyContainerArray] = Deserializer.deserialize(objContainerArray[strKeyContainerArray])
 		return objContainerArray
 
-	def costs_threshold_exceeded_notify(self):
-
-		arrParams = [
-		]
-
-		self.rpc("costs_threshold_exceeded_notify", arrParams)
-
-
-	def network_traffic_threshold_exceeded_notify(self):
-
-		arrParams = [
-		]
-
-		self.rpc("network_traffic_threshold_exceeded_notify", arrParams)
-
-
-	def costs_threshold_user_charged_timestamp_reset(self):
-
-		arrParams = [
-		]
-
-		self.rpc("costs_threshold_user_charged_timestamp_reset", arrParams)
-
-
 	def threshold_create(self, strUserIDOwner, objThreshold):
 
 		objThreshold = Serializer.serialize(objThreshold)
@@ -2419,17 +2384,16 @@ class API(Client):
 			arrThresholds[index] = Deserializer.deserialize(arrThresholds[index])
 		return arrThresholds
 
-	def threshold_edit(self, nThresholdID, objThreshold):
+	def threshold_edit(self, nThresholdID, objThresholdOperation):
 
-		objThreshold = Serializer.serialize(objThreshold)
+		objThresholdOperation = Serializer.serialize(objThresholdOperation)
 
 		arrParams = [
 			nThresholdID,
-			objThreshold,
+			objThresholdOperation,
 		]
 
-		self.rpc("threshold_edit", arrParams)
-
+		return Deserializer.deserialize(self.rpc("threshold_edit", arrParams))
 
 	def threshold_get(self, nThresholdID):
 

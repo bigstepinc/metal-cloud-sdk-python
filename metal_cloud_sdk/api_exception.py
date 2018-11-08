@@ -1,6 +1,6 @@
 
 """
-* Metal Cloud, API v3.0"""
+* Metal Cloud, API v3.1"""
 
 class ApiException(Exception):
 

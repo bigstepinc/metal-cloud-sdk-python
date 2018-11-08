@@ -65,7 +65,7 @@ class Drive(object):
 	template_id_origin = None;
 
 	"""
-	Drive Credentials
+	Information to connect via iSCSI or bootable drive associated credentials.
 	"""
 	drive_credentials = None;
 

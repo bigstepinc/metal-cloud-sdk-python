@@ -25,7 +25,7 @@ class ExtendedAPI(Client):
 		return ExtendedAPI.__instance
 
 
-	""" 263 functions available on endpoint. """
+	""" 270 functions available on endpoint. """
 
 	def cluster_create(self, strInfrastructureID, objCluster):
 
@@ -2396,12 +2396,10 @@ class ExtendedAPI(Client):
 
 		return Deserializer.deserialize(self.rpc("datacenter_get", arrParams))
 
-	def infrastructure_overview_children_products(self, strInfrastructureID, bAccessSaaSAPI = True, nAccessSaaSAPITimeoutSeconds = 10):
+	def infrastructure_overview_children_products(self, strInfrastructureID):
 
 		arrParams = [
 			strInfrastructureID,
-			bAccessSaaSAPI,
-			nAccessSaaSAPITimeoutSeconds,
 		]
 
 		return self.rpc("infrastructure_overview_children_products", arrParams)
@@ -2436,24 +2434,6 @@ class ExtendedAPI(Client):
 		]
 
 		self.rpc("ip_custom_reverse_record_add", arrParams)
-
-
-	def infrastructure_available_subnet_lan_pools(self, nInfrastructureID):
-
-		arrParams = [
-			nInfrastructureID,
-		]
-
-		return self.rpc("infrastructure_available_subnet_lan_pools", arrParams)
-
-
-	def infrastructure_lan_subnet_available_prefixes(self, nInfrastructureID):
-
-		arrParams = [
-			nInfrastructureID,
-		]
-
-		return self.rpc("infrastructure_lan_subnet_available_prefixes", arrParams)
 
 
 	def drive_attach_container(self, strDriveID, strContainerID):
@@ -2618,6 +2598,24 @@ class ExtendedAPI(Client):
 		return self.rpc("support_ticket_options", arrParams)
 
 
+	def infrastructure_lan_subnet_pools_available(self, nInfrastructureID):
+
+		arrParams = [
+			nInfrastructureID,
+		]
+
+		return self.rpc("infrastructure_lan_subnet_pools_available", arrParams)
+
+
+	def infrastructure_lan_subnet_prefixes_available(self, nInfrastructureID):
+
+		arrParams = [
+			nInfrastructureID,
+		]
+
+		return self.rpc("infrastructure_lan_subnet_prefixes_available", arrParams)
+
+
 	def server_instance_oob_allowed_ips(self, strInstanceID):
 
 		arrParams = [
@@ -2699,4 +2697,78 @@ class ExtendedAPI(Client):
 		for strKeyDriveArray in objDriveArray:
 			objDriveArray[strKeyDriveArray] = Deserializer.deserialize(objDriveArray[strKeyDriveArray])
 		return objDriveArray
+
+	def cluster_instance_arrays(self, strClusterID, arrInstanceArrayIDs = None):
+
+		arrParams = [
+			strClusterID,
+			arrInstanceArrayIDs,
+		]
+
+		objInstanceArray = self.rpc("cluster_instance_arrays", arrParams)
+		for strKeyInstanceArray in objInstanceArray:
+			objInstanceArray[strKeyInstanceArray] = Deserializer.deserialize(objInstanceArray[strKeyInstanceArray])
+		return objInstanceArray
+
+	def container_cluster_container_arrays(self, strContainerClusterID, arrContainerArrayIDs = None):
+
+		arrParams = [
+			strContainerClusterID,
+			arrContainerArrayIDs,
+		]
+
+		objContainerArray = self.rpc("container_cluster_container_arrays", arrParams)
+		for strKeyContainerArray in objContainerArray:
+			objContainerArray[strKeyContainerArray] = Deserializer.deserialize(objContainerArray[strKeyContainerArray])
+		return objContainerArray
+
+	def threshold_create(self, strUserIDOwner, objThreshold):
+
+		objThreshold = Serializer.serialize(objThreshold)
+
+		arrParams = [
+			strUserIDOwner,
+			objThreshold,
+		]
+
+		return Deserializer.deserialize(self.rpc("threshold_create", arrParams))
+
+	def thresholds(self, strUserIDOwner):
+
+		arrParams = [
+			strUserIDOwner,
+		]
+
+		arrThresholds = self.rpc("thresholds", arrParams)
+		for index in range(len(arrThresholds)):
+			arrThresholds[index] = Deserializer.deserialize(arrThresholds[index])
+		return arrThresholds
+
+	def threshold_edit(self, nThresholdID, objThresholdOperation):
+
+		objThresholdOperation = Serializer.serialize(objThresholdOperation)
+
+		arrParams = [
+			nThresholdID,
+			objThresholdOperation,
+		]
+
+		return Deserializer.deserialize(self.rpc("threshold_edit", arrParams))
+
+	def threshold_get(self, nThresholdID):
+
+		arrParams = [
+			nThresholdID,
+		]
+
+		return Deserializer.deserialize(self.rpc("threshold_get", arrParams))
+
+	def threshold_delete(self, nThresholdID):
+
+		arrParams = [
+			nThresholdID,
+		]
+
+		self.rpc("threshold_delete", arrParams)
+
 
