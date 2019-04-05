@@ -109,6 +109,7 @@ class Drive(object):
 	drive_operating_system = None;
 
 	"""
-	Drive file system information
+	Ignored if the <code>drive_service_status</code> property is
+	<code>SERVICE_STATUS_ACTIVE</code>
 	"""
 	drive_filesystem = None;

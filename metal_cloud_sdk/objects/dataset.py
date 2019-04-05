@@ -5,13 +5,13 @@ class Dataset(object):
 	Datasets are sources of data, that can be imported in a DataLake
 	"""
 
-	def __init__(self, dataset_name, dataset_description, dataset_price, dataset_price_currency, dataset_tags, dataset_datacenter, dataset_source_display_name, dataset_maintainer_display_name, dataset_formats):
+	def __init__(self, dataset_name, dataset_description, dataset_price, dataset_price_currency, dataset_tags, datacenter_name, dataset_source_display_name, dataset_maintainer_display_name, dataset_formats):
 		self.dataset_name = dataset_name;
 		self.dataset_description = dataset_description;
 		self.dataset_price = dataset_price;
 		self.dataset_price_currency = dataset_price_currency;
 		self.dataset_tags = dataset_tags;
-		self.dataset_datacenter = dataset_datacenter;
+		self.datacenter_name = datacenter_name;
 		self.dataset_source_display_name = dataset_source_display_name;
 		self.dataset_maintainer_display_name = dataset_maintainer_display_name;
 		self.dataset_formats = dataset_formats;
@@ -70,7 +70,7 @@ class Dataset(object):
 	"""
 	The datacenter in which the dataset is available
 	"""
-	dataset_datacenter = None;
+	datacenter_name = None;
 
 	"""
 	The actual source of the data (not necessarily the maintainer)

@@ -2396,15 +2396,6 @@ class ExtendedAPI(Client):
 
 		return Deserializer.deserialize(self.rpc("datacenter_get", arrParams))
 
-	def infrastructure_overview_children_products(self, strInfrastructureID):
-
-		arrParams = [
-			strInfrastructureID,
-		]
-
-		return self.rpc("infrastructure_overview_children_products", arrParams)
-
-
 	def ip_custom_reverse_records(self, strInfrastructureID):
 
 		arrParams = [
@@ -2770,5 +2761,14 @@ class ExtendedAPI(Client):
 		]
 
 		self.rpc("threshold_delete", arrParams)
+
+
+	def dataset_subscriptions(self, nDatasetID):
+
+		arrParams = [
+			nDatasetID,
+		]
+
+		self.rpc("dataset_subscriptions", arrParams)
 
 

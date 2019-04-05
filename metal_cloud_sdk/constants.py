@@ -5,7 +5,7 @@ import importlib
 class Constants(object):
 
 	"""
-	* Metal Cloud, API v3.1
+	* Metal Cloud, API v3.1.1
 	"""
 	
 	

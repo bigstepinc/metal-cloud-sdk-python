@@ -25,7 +25,7 @@ class API(Client):
 		return API.__instance
 
 
-	""" 239 functions available on endpoint. """
+	""" 244 functions available on endpoint. """
 
 	def cluster_create(self, strInfrastructureID, objCluster):
 
@@ -2411,4 +2411,57 @@ class API(Client):
 
 		self.rpc("threshold_delete", arrParams)
 
+
+	def dataset_subscriptions(self, nDatasetID):
+
+		arrParams = [
+			nDatasetID,
+		]
+
+		self.rpc("dataset_subscriptions", arrParams)
+
+
+	def instance_rows(self, strUserID, arrInstanceIDs = None):
+
+		arrParams = [
+			strUserID,
+			arrInstanceIDs,
+		]
+
+		return self.rpc("instance_rows", arrParams)
+
+
+	def independent_instance_create(self, strUserIDOwner, strLabel, strDatacenterName, strServerTypeID, arrFirewallRules = [], strStorageType = "none", nStorageSizeMBytes = 0, strVolumeTemplateID = None):
+
+		arrFirewallRules = Serializer.serialize(arrFirewallRules)
+
+		arrParams = [
+			strUserIDOwner,
+			strLabel,
+			strDatacenterName,
+			strServerTypeID,
+			arrFirewallRules,
+			strStorageType,
+			nStorageSizeMBytes,
+			strVolumeTemplateID,
+		]
+
+		return Deserializer.deserialize(self.rpc("independent_instance_create", arrParams))
+
+	def independent_instance_delete(self, strInstanceID):
+
+		arrParams = [
+			strInstanceID,
+		]
+
+		return Deserializer.deserialize(self.rpc("independent_instance_delete", arrParams))
+
+	def independent_instance_storage_expand(self, strInstanceID, nStorageSizeMBytes):
+
+		arrParams = [
+			strInstanceID,
+			nStorageSizeMBytes,
+		]
+
+		return Deserializer.deserialize(self.rpc("independent_instance_storage_expand", arrParams))
 

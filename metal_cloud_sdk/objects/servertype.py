@@ -21,12 +21,18 @@ class ServerType(object):
 	server_network_total_capacity_mbps = None;
 
 	"""
-	The name of the server type.
+	The name of the server type. It does not contain whitespaces. It normally
+	never changes.
 	"""
 	server_type_name = None;
 
 	"""
-	The label of the server type.
+	An comprehensive server type name, which may change at any time.
+	"""
+	server_type_display_name = None;
+
+	"""
+	Deprecated, ignored and unused.
 	"""
 	server_type_label = None;
 

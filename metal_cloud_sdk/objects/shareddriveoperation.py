@@ -57,11 +57,11 @@ class SharedDriveOperation(object):
 	shared_drive_storage_type = None;
 
 	"""
-	Indicates if the instances attached to this SharedDrive will have GFS
-	installed and that they will mount this SharedDrive (only supported for
-	Centos 7.x).
+	This feature is no longer available. The flag is ignored. Indicates if the
+	instances attached to this SharedDrive will have GFS installed and that they
+	will mount this SharedDrive (only supported for Centos 7.x).
 	"""
-	shared_drive_has_gfs = True;
+	shared_drive_has_gfs = False;
 
 	"""
 	ISO 8601 timestamp which holds the date and time when the SharedDrive was

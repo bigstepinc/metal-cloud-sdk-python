@@ -5,8 +5,7 @@ class DatacenterConfig(object):
 	Configuration specific to a particular datacenter.
 	"""
 
-	def __init__(self, BSIInternalHAProxyIPs, SANRoutedSubnet, BSIVRRPListenIPv4, BSIMachineListenIPv4List, BSIExternallyVisibleIPv4, repoURLRoot, repoURLRootQuarantineNetwork, NTPServers, DNSServers, TFTPServerWANVRRPListenIPv4, dataLakeEnabled):
-		self.BSIInternalHAProxyIPs = BSIInternalHAProxyIPs;
+	def __init__(self, SANRoutedSubnet, BSIVRRPListenIPv4, BSIMachineListenIPv4List, BSIExternallyVisibleIPv4, repoURLRoot, repoURLRootQuarantineNetwork, NTPServers, DNSServers, TFTPServerWANVRRPListenIPv4, dataLakeEnabled):
 		self.SANRoutedSubnet = SANRoutedSubnet;
 		self.BSIVRRPListenIPv4 = BSIVRRPListenIPv4;
 		self.BSIMachineListenIPv4List = BSIMachineListenIPv4List;
@@ -18,14 +17,6 @@ class DatacenterConfig(object):
 		self.TFTPServerWANVRRPListenIPv4 = TFTPServerWANVRRPListenIPv4;
 		self.dataLakeEnabled = dataLakeEnabled;
 
-
-	"""
-	Private IP addresses, configured permanently in Metal Cloud head servers on
-	network interfaces, for the inside network of a HA Proxy server. When Metal
-	Cloud deploy agents connect to Metal Cloud, unless the connection remote IP
-	is one of these HA Proxy servers, it will be rejected by Metal Cloud.
-	"""
-	BSIInternalHAProxyIPs = [];
 
 	"""
 	CIDR format subnet. The datacenter SAN subnet, routed and protected by ACLs

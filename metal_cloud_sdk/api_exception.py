@@ -1,6 +1,6 @@
 
 """
-* Metal Cloud, API v3.1"""
+* Metal Cloud, API v3.1.1"""
 
 class ApiException(Exception):
 
@@ -131,6 +131,15 @@ class ApiException(Exception):
 	.
 	"""
 	DATACENTER_NOT_FOUND=269
+
+
+	"""
+	Delegate user login email is not verified.
+	@public
+	
+	.
+	"""
+	DELEGATE_USER_LOGIN_EMAIL_NOT_VERIFIED=325
 
 
 	"""
@@ -1948,6 +1957,7 @@ class ApiException(Exception):
 		CONTAINER_PLATFORM_NOT_ENOUGH_SPACE_FOR_PERSISTENT_DIRECTORIES,
 		DATA_LOSS_NOT_CONFIRMED,
 		DATACENTER_NOT_FOUND,
+		DELEGATE_USER_LOGIN_EMAIL_NOT_VERIFIED,
 		DISK_TYPE_INVALID,
 		DNS_LABEL_RESERVED,
 		DOMAIN_LABEL_ALREADY_IN_USE,

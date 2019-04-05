@@ -20,7 +20,7 @@ class InstanceCredentials(object):
 	rdp = None;
 
 	"""
-	IPMI credentials.
+	Deprecated, always null.
 	"""
 	ipmi = None;
 
@@ -30,12 +30,12 @@ class InstanceCredentials(object):
 	telnet = None;
 
 	"""
-	iLO admin software panel credentials.
+	Deprecated, always null. iLO admin software panel credentials.
 	"""
 	ilo = None;
 
 	"""
-	iDRAC admin software panel credentials.
+	Deprecated, always null. iDRAC admin software panel credentials.
 	"""
 	idrac = None;
 

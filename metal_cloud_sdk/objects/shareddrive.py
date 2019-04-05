@@ -2,7 +2,7 @@
 
 class SharedDrive(object):
 	"""
-	A SharedDrive is a storage device mounted via iSCSI that is accesible to
+	A SharedDrive is a storage device mounted via iSCSI that is accessible to
 	multiple instance arrays.
 	"""
 
@@ -43,11 +43,11 @@ class SharedDrive(object):
 	shared_drive_storage_type = "iscsi_ssd";
 
 	"""
-	Indicates if the instances attached to this SharedDrive will have GFS
-	installed and that they will mount this SharedDrive (only supported for
-	Centos 7.x).
+	This feature is no longer available. The flag is ignored. Indicates if the
+	instances attached to this SharedDrive will have GFS installed and that they
+	will mount this SharedDrive (only supported for Centos 7.x).
 	"""
-	shared_drive_has_gfs = True;
+	shared_drive_has_gfs = False;
 
 	"""
 	Represents the infrastructure ID to which the SharedDrive belongs.
