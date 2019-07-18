@@ -666,10 +666,11 @@ class Guest(Client):
 		return self.rpc("infrastructure_deploy_shutdown_required", arrParams)
 
 
-	def server_types(self, strDatacenterName = None):
+	def server_types(self, strDatacenterName = None, bOnlyAvailable = False):
 
 		arrParams = [
 			strDatacenterName,
+			bOnlyAvailable,
 		]
 
 		objServerType = self.rpc("server_types", arrParams)
@@ -994,7 +995,7 @@ class Guest(Client):
 			objInfrastructure[strKeyInfrastructure] = Deserializer.deserialize(objInfrastructure[strKeyInfrastructure])
 		return objInfrastructure
 
-	def user_authenticate_password(self, strLoginEmail, strPassword, strOneTimePassword = None, bRememberLogin = False, bTestCredentials = False, bRenewKerberosTicket = False):
+	def user_authenticate_password(self, strLoginEmail, strPassword, strOneTimePassword = None, bRememberLogin = True, bTestCredentials = False, bRenewKerberosTicket = False):
 
 		arrParams = [
 			strLoginEmail,
@@ -1008,7 +1009,7 @@ class Guest(Client):
 		return self.rpc("user_authenticate_password", arrParams)
 
 
-	def user_authenticate_api_key(self, strUserID, strAPIKey, strOneTimePassword = None, bRememberLogin = False):
+	def user_authenticate_api_key(self, strUserID, strAPIKey, strOneTimePassword = None, bRememberLogin = True):
 
 		arrParams = [
 			strUserID,
@@ -1290,7 +1291,7 @@ class Guest(Client):
 		self.rpc("user_change_password_encrypted", arrParams)
 
 
-	def user_authenticate_password_encrypted(self, strLoginEmail, strAESCipherPassword, strRSACipherAESKey, strOneTimePassword = None, bRememberLogin = False, bTestCredentials = False, bRenewKerberosTicket = False):
+	def user_authenticate_password_encrypted(self, strLoginEmail, strAESCipherPassword, strRSACipherAESKey, strOneTimePassword = None, bRememberLogin = True, bTestCredentials = False, bRenewKerberosTicket = False):
 
 		arrParams = [
 			strLoginEmail,

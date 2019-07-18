@@ -26,6 +26,14 @@ class Cluster(object):
 	cluster_subdomain = None;
 
 	"""
+	Automatically created based on <code>cluster_id</code>. It is a unique
+	reference to the Cluster object that never changes, so it can be trusted in
+	various configs. Starting with clusters created and deployed using API
+	v3.2.0 it points to all the child instances in DNS.
+	"""
+	cluster_subdomain_permanent = None;
+
+	"""
 	The ID of the Cluster which can be used instead of the
 	<code>cluster_label</code> or <code>cluster_subdomain</code> when calling
 	the API functions. It is automatically generated and cannot be edited.

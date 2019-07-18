@@ -33,6 +33,11 @@ class VolumeTemplate(object):
 	volume_template_size_mbytes = None;
 
 	"""
+	Wether the template supports booting and running from local disks.
+	"""
+	volume_template_local_disk_supported = False;
+
+	"""
 	An arbitrary UTF-8 string which provides a description of the template.
 	"""
 	volume_template_description = "";

@@ -1,5 +1,5 @@
 """
-* Metal Cloud, API v3.1.1"""
+* Metal Cloud, API v3.2.0"""
 class Events(object):
 
 

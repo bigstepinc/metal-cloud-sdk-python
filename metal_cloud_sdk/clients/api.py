@@ -25,7 +25,7 @@ class API(Client):
 		return API.__instance
 
 
-	""" 244 functions available on endpoint. """
+	""" 246 functions available on endpoint. """
 
 	def cluster_create(self, strInfrastructureID, objCluster):
 
@@ -472,16 +472,6 @@ class API(Client):
 		for strKeyDatacenter in objDatacenter:
 			objDatacenter[strKeyDatacenter] = Deserializer.deserialize(objDatacenter[strKeyDatacenter])
 		return objDatacenter
-
-	def events_delete(self, strInfrastructureID, arrEventIDs):
-
-		arrParams = [
-			strInfrastructureID,
-			arrEventIDs,
-		]
-
-		self.rpc("events_delete", arrParams)
-
 
 	def fs_create(self, strFSURL, strType, strPermission = None):
 
@@ -1161,10 +1151,11 @@ class API(Client):
 
 		return Deserializer.deserialize(self.rpc("server_type_get", arrParams))
 
-	def server_types(self, strDatacenterName = None):
+	def server_types(self, strDatacenterName = None, bOnlyAvailable = False):
 
 		arrParams = [
 			strDatacenterName,
+			bOnlyAvailable,
 		]
 
 		objServerType = self.rpc("server_types", arrParams)
@@ -1685,7 +1676,7 @@ class API(Client):
 		self.rpc("user_api_key_regenerate", arrParams)
 
 
-	def user_authenticate_password(self, strLoginEmail, strPassword, strOneTimePassword = None, bRememberLogin = False, bTestCredentials = False, bRenewKerberosTicket = False):
+	def user_authenticate_password(self, strLoginEmail, strPassword, strOneTimePassword = None, bRememberLogin = True, bTestCredentials = False, bRenewKerberosTicket = False):
 
 		arrParams = [
 			strLoginEmail,
@@ -1699,7 +1690,7 @@ class API(Client):
 		return self.rpc("user_authenticate_password", arrParams)
 
 
-	def user_authenticate_api_key(self, strUserID, strAPIKey, strOneTimePassword = None, bRememberLogin = False):
+	def user_authenticate_api_key(self, strUserID, strAPIKey, strOneTimePassword = None, bRememberLogin = True):
 
 		arrParams = [
 			strUserID,
@@ -1710,7 +1701,7 @@ class API(Client):
 
 		return Deserializer.deserialize(self.rpc("user_authenticate_api_key", arrParams))
 
-	def user_authenticate_password_encrypted(self, strLoginEmail, strAESCipherPassword, strRSACipherAESKey, strOneTimePassword = None, bRememberLogin = False, bTestCredentials = False, bRenewKerberosTicket = False):
+	def user_authenticate_password_encrypted(self, strLoginEmail, strAESCipherPassword, strRSACipherAESKey, strOneTimePassword = None, bRememberLogin = True, bTestCredentials = False, bRenewKerberosTicket = False):
 
 		arrParams = [
 			strLoginEmail,
@@ -2464,4 +2455,33 @@ class API(Client):
 		]
 
 		return Deserializer.deserialize(self.rpc("independent_instance_storage_expand", arrParams))
+
+	def instance_label_is_available_assert(self, strUserIDOwner, strInstanceLabel):
+
+		arrParams = [
+			strUserIDOwner,
+			strInstanceLabel,
+		]
+
+		self.rpc("instance_label_is_available_assert", arrParams)
+
+
+	def jwt_session_cookies_types_to_cookies_names(self):
+
+		arrParams = [
+		]
+
+		return self.rpc("jwt_session_cookies_types_to_cookies_names", arrParams)
+
+
+	def independent_instance_firewall_rules_update(self, strInstanceID, arrFirewallRules):
+
+		arrFirewallRules = Serializer.serialize(arrFirewallRules)
+
+		arrParams = [
+			strInstanceID,
+			arrFirewallRules,
+		]
+
+		return Deserializer.deserialize(self.rpc("independent_instance_firewall_rules_update", arrParams))
 

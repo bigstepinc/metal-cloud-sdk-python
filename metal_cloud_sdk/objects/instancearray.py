@@ -21,9 +21,18 @@ class InstanceArray(object):
 
 	"""
 	Automatically created based on <code>instance_array_label</code>. It is a
-	unique reference to the InstanceArray object.
+	unique reference to the InstanceArray object. In DNS it points to all the
+	child instances primary public IP addresses.
 	"""
 	instance_array_subdomain = None;
+
+	"""
+	Automatically created based on <code>instance_array_id</code>. It is a
+	unique reference to the InstanceArray object that never changes, so it can
+	be used in various configs. In DNS it points to all the child instances
+	primary public IP addresses.
+	"""
+	instance_array_subdomain_permanent = None;
 
 	"""
 	The ID of the InstanceArray which can be used instead of the
@@ -120,6 +129,12 @@ class InstanceArray(object):
 	instance_array_interfaces = [];
 
 	"""
+	Determines wether the server will boot from local drives or from NAS over
+	iSCSI.
+	"""
+	instance_array_boot_method = "pxe_iscsi";
+
+	"""
 	If not <code>null</code>, then the InstanceArray is part of the specified
 	<a:schema>Cluster</a:schema>.
 	"""
@@ -169,9 +184,10 @@ class InstanceArray(object):
 
 	"""
 	Contains the firewall rules (an array of <a:schema>FirewallRule</a:schema>
-	objects).
+	objects). When creating a new InstanceArray, if null, default firewall rules
+	are applied (allow any source ICMP, any private IPv4, and others).
 	"""
-	instance_array_firewall_rules = [];
+	instance_array_firewall_rules = None;
 
 	"""
 	The volume template ID (or name) to use if the servers in the InstanceArray

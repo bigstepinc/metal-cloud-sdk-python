@@ -5,7 +5,7 @@ import importlib
 class Constants(object):
 
 	"""
-	* Metal Cloud, API v3.1.1
+	* Metal Cloud, API v3.2.0
 	"""
 	
 	
@@ -79,6 +79,14 @@ class Constants(object):
 	SaaS cluster of type MapR
 	"""
 	CLUSTER_TYPE_HORTONWORKS="hortonworks"
+	
+	
+	"""
+	Kubernetes cluster type.
+	
+	SaaS cluster of type Kubernetes
+	"""
+	CLUSTER_TYPE_KUBERNETES="kubernetes"
 	
 	
 	"""
@@ -408,6 +416,14 @@ class Constants(object):
 	
 	"""
 	DRIVE_STORAGE_TYPE_ISCSI_SSD="iscsi_ssd"
+	
+	
+	"""
+	Don't create a drive option.
+	
+	Used when indicating the absence of a drive (like NULL).
+	"""
+	DRIVE_STORAGE_TYPE_NONE="none"
 	
 	
 	"""

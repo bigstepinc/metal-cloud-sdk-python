@@ -1,6 +1,6 @@
 
 """
-* Metal Cloud, API v3.1.1"""
+* Metal Cloud, API v3.2.0"""
 
 class ApiException(Exception):
 
@@ -235,6 +235,15 @@ class ApiException(Exception):
 	The specified DriveArray is already attached to another InstanceArray. Detach it or find a free DriveArray before trying again.
 	"""
 	DRIVE_ARRAY_IS_ATTACHED=203
+
+
+	"""
+	Drive array is not attached.
+	@public
+	
+	.
+	"""
+	DRIVE_ARRAY_IS_NOT_ATTACHED=328
 
 
 	"""
@@ -1139,6 +1148,15 @@ class ApiException(Exception):
 
 
 	"""
+	Read-only property.
+	@public
+	
+	.
+	"""
+	PROPERTY_READ_ONLY=326
+
+
+	"""
 	Resource reservation not found.
 	@public
 	
@@ -1370,6 +1388,15 @@ class ApiException(Exception):
 	This error is thrown during SSH key validation, if an unknown algorithm identifier prefix is found when decoding the SSH key data. The allowed algorithm identifiers are: ssh-rsa, ssh-dsa, and ssh-dss.
 	"""
 	SSH_KEY_UNKWOWN_ALGORITHM_IDENTIFIER=21
+
+
+	"""
+	Storage allocation error.
+	@public
+	
+	.
+	"""
+	STORAGE_ALLOCATION_ERROR=327
 
 
 	"""
@@ -1967,6 +1994,7 @@ class ApiException(Exception):
 		DRIVE_ARRAY_DETACH_NOT_ALLOWED,
 		DRIVE_ARRAY_INSTANCE_ARRAY_DETACH_NOT_ALLOWED,
 		DRIVE_ARRAY_IS_ATTACHED,
+		DRIVE_ARRAY_IS_NOT_ATTACHED,
 		DRIVE_ARRAY_MULTIPLE_ATTACH_NOT_ALLOWED,
 		DRIVE_CANNOT_BE_ATTACHED_TO_A_DELETED_INSTANCE,
 		DRIVE_IS_NOT_ATTACHED,
@@ -2040,6 +2068,7 @@ class ApiException(Exception):
 		PRODUCT_WITH_CHANGES_CANNOT_BE_STOPPED,
 		PROPERTY_IS_MANDATORY,
 		PROPERTY_IS_UNKNOWN,
+		PROPERTY_READ_ONLY,
 		RESOURCE_RESERVATION_NOT_FOUND,
 		SELECTION_LIMIT_EXCEEDED,
 		SERVER_MIGHT_NOT_BE_READY_FOR_POWER_GET,
@@ -2058,6 +2087,7 @@ class ApiException(Exception):
 		SSH_KEY_INVALID_DATA_PKCS8,
 		SSH_KEY_UNKNOWN_FORMAT,
 		SSH_KEY_UNKWOWN_ALGORITHM_IDENTIFIER,
+		STORAGE_ALLOCATION_ERROR,
 		STORAGE_SNAPSHOT_NOT_FOUND,
 		STORAGE_VOLUME_TEMPLATE_NOT_FOUND,
 		SUBNET_EXHAUSTED,

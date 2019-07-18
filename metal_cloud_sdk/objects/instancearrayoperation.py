@@ -8,7 +8,7 @@ class InstanceArrayOperation(object):
 	operation object.
 	"""
 
-	def __init__(self, instance_array_label, instance_array_instance_count, instance_array_ipv4_subnet_create_auto, instance_array_virtual_interfaces_enabled, instance_array_ip_allocate_auto, instance_array_ram_gbytes, instance_array_processor_count, instance_array_processor_core_mhz, instance_array_processor_core_count, drive_array_id_boot, instance_array_change_id, instance_array_firewall_managed, instance_array_firewall_rules):
+	def __init__(self, instance_array_label, instance_array_instance_count, instance_array_ipv4_subnet_create_auto, instance_array_virtual_interfaces_enabled, instance_array_ip_allocate_auto, instance_array_ram_gbytes, instance_array_processor_count, instance_array_processor_core_mhz, instance_array_processor_core_count, drive_array_id_boot, instance_array_change_id, instance_array_firewall_managed):
 		self.instance_array_label = instance_array_label;
 		self.instance_array_instance_count = instance_array_instance_count;
 		self.instance_array_ipv4_subnet_create_auto = instance_array_ipv4_subnet_create_auto;
@@ -21,13 +21,18 @@ class InstanceArrayOperation(object):
 		self.drive_array_id_boot = drive_array_id_boot;
 		self.instance_array_change_id = instance_array_change_id;
 		self.instance_array_firewall_managed = instance_array_firewall_managed;
-		self.instance_array_firewall_rules = instance_array_firewall_rules;
 
 
 	"""
 	The status of the deploy process.
 	"""
 	instance_array_deploy_status = None;
+
+	"""
+	Determines wether the server will boot from local drives or from NAS over
+	iSCSI.
+	"""
+	instance_array_boot_method = "pxe_iscsi";
 
 	"""
 	The operation applied to the InstanceArray.
@@ -157,9 +162,11 @@ class InstanceArrayOperation(object):
 	instance_array_firewall_managed = None;
 
 	"""
-	Contains the firewall rules.
+	Contains the firewall rules (an array of <a:schema>FirewallRule</a:schema>
+	objects). When creating a new InstanceArray, if null, default firewall rules
+	are applied (allow any source ICMP, any private IPv4, and others).
 	"""
-	instance_array_firewall_rules = [];
+	instance_array_firewall_rules = None;
 
 	"""
 	The volume template ID or name. 
