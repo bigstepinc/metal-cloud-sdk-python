@@ -69,6 +69,13 @@ class Subnet(object):
 	infrastructure_id = None;
 
 	"""
+	The ID of a cluster in the same infrastructure. This property is reserved
+	for subnets with subnet_automatic_allocation=0, subnet_destination='wan' and
+	(for now) subnet_type='ipv4'.
+	"""
+	cluster_id = None;
+
+	"""
 	The netmask in dotted notation for IPv4 or full notation for IPv6. IPv4
 	example: "255.255.255.240"; IPv6 example: "
 	ffff:ffff:ffff:ffff:0000:0000:0000:0000".

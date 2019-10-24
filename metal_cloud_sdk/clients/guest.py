@@ -97,11 +97,12 @@ class Guest(Client):
 			objCluster[strKeyCluster] = Deserializer.deserialize(objCluster[strKeyCluster])
 		return objCluster
 
-	def datacenters(self, strUserID = None, bOnlyActive = False):
+	def datacenters(self, strUserID = None, bOnlyActive = False, bIncludeConfigProperties = False):
 
 		arrParams = [
 			strUserID,
 			bOnlyActive,
+			bIncludeConfigProperties,
 		]
 
 		objDatacenter = self.rpc("datacenters", arrParams)
@@ -2625,13 +2626,13 @@ class Guest(Client):
 		return self.rpc("infrastructure_lan_subnet_pools_available", arrParams)
 
 
-	def infrastructure_lan_subnet_prefixes_available(self, nInfrastructureID):
+	def infrastructure_lan_subnet_prefix_sizes_available(self, nInfrastructureID):
 
 		arrParams = [
 			nInfrastructureID,
 		]
 
-		return self.rpc("infrastructure_lan_subnet_prefixes_available", arrParams)
+		return self.rpc("infrastructure_lan_subnet_prefix_sizes_available", arrParams)
 
 
 	def server_instance_oob_allowed_ips(self, strInstanceID):

@@ -100,6 +100,21 @@ class DatacenterConfig(object):
 	monitoringGraphiteRenderURLHost = "";
 
 	"""
+	Coordinates latitude in decimal degrees.
+	"""
+	latitude = 0;
+
+	"""
+	Coordinates longitude in decimal degrees.
+	"""
+	longitude = 0;
+
+	"""
+	Address, such as: Chez Gusteau, Paris, France.
+	"""
+	address = "";
+
+	"""
 	The schema type
 	"""
 	type = None;

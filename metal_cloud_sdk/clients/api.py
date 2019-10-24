@@ -25,7 +25,7 @@ class API(Client):
 		return API.__instance
 
 
-	""" 246 functions available on endpoint. """
+	""" 250 functions available on endpoint. """
 
 	def cluster_create(self, strInfrastructureID, objCluster):
 
@@ -461,11 +461,12 @@ class API(Client):
 		return self.rpc("data_lake_krb_conf_download_url", arrParams)
 
 
-	def datacenters(self, strUserID = None, bOnlyActive = False):
+	def datacenters(self, strUserID = None, bOnlyActive = False, bIncludeConfigProperties = False):
 
 		arrParams = [
 			strUserID,
 			bOnlyActive,
+			bIncludeConfigProperties,
 		]
 
 		objDatacenter = self.rpc("datacenters", arrParams)
@@ -2278,13 +2279,13 @@ class API(Client):
 		return self.rpc("infrastructure_lan_subnet_pools_available", arrParams)
 
 
-	def infrastructure_lan_subnet_prefixes_available(self, nInfrastructureID):
+	def infrastructure_lan_subnet_prefix_sizes_available(self, nInfrastructureID):
 
 		arrParams = [
 			nInfrastructureID,
 		]
 
-		return self.rpc("infrastructure_lan_subnet_prefixes_available", arrParams)
+		return self.rpc("infrastructure_lan_subnet_prefix_sizes_available", arrParams)
 
 
 	def dataset_readme_upload_url(self):
@@ -2484,4 +2485,39 @@ class API(Client):
 		]
 
 		return Deserializer.deserialize(self.rpc("independent_instance_firewall_rules_update", arrParams))
+
+	def subnet_prefix_sizes_wan(self, strSubnetType):
+
+		arrParams = [
+			strSubnetType,
+		]
+
+		return self.rpc("subnet_prefix_sizes_wan", arrParams)
+
+
+	def subnet_prefix_sizes_wan_cluster_attached(self, strSubnetType):
+
+		arrParams = [
+			strSubnetType,
+		]
+
+		return self.rpc("subnet_prefix_sizes_wan_cluster_attached", arrParams)
+
+
+	def infrastructure_ansible_inventory_get(self, strInstanceArrayID):
+
+		arrParams = [
+			strInstanceArrayID,
+		]
+
+		return self.rpc("infrastructure_ansible_inventory_get", arrParams)
+
+
+	def instance_array_interface_create(self, strInstanceArrayID):
+
+		arrParams = [
+			strInstanceArrayID,
+		]
+
+		return Deserializer.deserialize(self.rpc("instance_array_interface_create", arrParams))
 

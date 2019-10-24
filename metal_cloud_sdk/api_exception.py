@@ -44,6 +44,15 @@ class ApiException(Exception):
 
 
 	"""
+	Cannot automatically manage IP allocation for user managed hosts (containers, VMs, etc.).
+	@public
+	
+	Subnets destined to be used with Kubernetes, virtualization or special multi-IP address needs, need to be managed by user software or manually (must set subnet_automatic_allocation to false).
+	"""
+	CANNOT_AUTO_MANAGE_IP_ALLOCATION=329
+
+
+	"""
 	Cluster instance array isn't attached to WAN.
 	@public
 	
@@ -1975,6 +1984,7 @@ class ApiException(Exception):
 		API_KEY_MISMATCH,
 		API_KEY_NOT_FOUND,
 		AUTHENTICATOR_OTP_REJECTED,
+		CANNOT_AUTO_MANAGE_IP_ALLOCATION,
 		CLUSTER_INSTANCE_ARRAY_HAS_NO_WAN_INTERFACE,
 		CLUSTER_MIXING_NOT_ALLOWED,
 		COMPUTE_NODE_ARRAY_EDIT_DETACHING_DRIVES_INVALID_VALUE,

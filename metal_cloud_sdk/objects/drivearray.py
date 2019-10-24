@@ -41,9 +41,8 @@ class DriveArray(object):
 	volume_template_id = None;
 
 	"""
-	Represents the child Drives’ type of storage.
 	"""
-	drive_array_storage_type = "iscsi_ssd";
+	drive_array_storage_type = None;
 
 	"""
 	The Drive count on the Drive array.

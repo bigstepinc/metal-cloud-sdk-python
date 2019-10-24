@@ -25,7 +25,7 @@ class ExtendedAPI(Client):
 		return ExtendedAPI.__instance
 
 
-	""" 270 functions available on endpoint. """
+	""" 281 functions available on endpoint. """
 
 	def cluster_create(self, strInfrastructureID, objCluster):
 
@@ -97,11 +97,12 @@ class ExtendedAPI(Client):
 			objCluster[strKeyCluster] = Deserializer.deserialize(objCluster[strKeyCluster])
 		return objCluster
 
-	def datacenters(self, strUserID = None, bOnlyActive = False):
+	def datacenters(self, strUserID = None, bOnlyActive = False, bIncludeConfigProperties = False):
 
 		arrParams = [
 			strUserID,
 			bOnlyActive,
+			bIncludeConfigProperties,
 		]
 
 		objDatacenter = self.rpc("datacenters", arrParams)
@@ -2599,13 +2600,13 @@ class ExtendedAPI(Client):
 		return self.rpc("infrastructure_lan_subnet_pools_available", arrParams)
 
 
-	def infrastructure_lan_subnet_prefixes_available(self, nInfrastructureID):
+	def infrastructure_lan_subnet_prefix_sizes_available(self, nInfrastructureID):
 
 		arrParams = [
 			nInfrastructureID,
 		]
 
-		return self.rpc("infrastructure_lan_subnet_prefixes_available", arrParams)
+		return self.rpc("infrastructure_lan_subnet_prefix_sizes_available", arrParams)
 
 
 	def server_instance_oob_allowed_ips(self, strInstanceID):
@@ -2771,5 +2772,113 @@ class ExtendedAPI(Client):
 		]
 
 		self.rpc("dataset_subscriptions", arrParams)
+
+
+	def subnet_prefix_sizes_wan(self, strSubnetType):
+
+		arrParams = [
+			strSubnetType,
+		]
+
+		return self.rpc("subnet_prefix_sizes_wan", arrParams)
+
+
+	def independent_instance_create(self, strUserIDOwner, strLabel, strDatacenterName, strServerTypeID, arrFirewallRules = [], strStorageType = "none", nStorageSizeMBytes = 0, strVolumeTemplateID = None):
+
+		arrFirewallRules = Serializer.serialize(arrFirewallRules)
+
+		arrParams = [
+			strUserIDOwner,
+			strLabel,
+			strDatacenterName,
+			strServerTypeID,
+			arrFirewallRules,
+			strStorageType,
+			nStorageSizeMBytes,
+			strVolumeTemplateID,
+		]
+
+		return Deserializer.deserialize(self.rpc("independent_instance_create", arrParams))
+
+	def instance_label_is_available_assert(self, strUserIDOwner, strInstanceLabel):
+
+		arrParams = [
+			strUserIDOwner,
+			strInstanceLabel,
+		]
+
+		self.rpc("instance_label_is_available_assert", arrParams)
+
+
+	def instance_rows(self, strUserID, arrInstanceIDs = None):
+
+		arrParams = [
+			strUserID,
+			arrInstanceIDs,
+		]
+
+		return self.rpc("instance_rows", arrParams)
+
+
+	def independent_instance_delete(self, strInstanceID):
+
+		arrParams = [
+			strInstanceID,
+		]
+
+		return Deserializer.deserialize(self.rpc("independent_instance_delete", arrParams))
+
+	def independent_instance_storage_expand(self, strInstanceID, nStorageSizeMBytes):
+
+		arrParams = [
+			strInstanceID,
+			nStorageSizeMBytes,
+		]
+
+		return Deserializer.deserialize(self.rpc("independent_instance_storage_expand", arrParams))
+
+	def independent_instance_firewall_rules_update(self, strInstanceID, arrFirewallRules):
+
+		arrFirewallRules = Serializer.serialize(arrFirewallRules)
+
+		arrParams = [
+			strInstanceID,
+			arrFirewallRules,
+		]
+
+		return Deserializer.deserialize(self.rpc("independent_instance_firewall_rules_update", arrParams))
+
+	def instance_array_interface_create(self, strInstanceArrayID):
+
+		arrParams = [
+			strInstanceArrayID,
+		]
+
+		return Deserializer.deserialize(self.rpc("instance_array_interface_create", arrParams))
+
+	def infrastructure_ansible_inventory_get(self, strInstanceArrayID):
+
+		arrParams = [
+			strInstanceArrayID,
+		]
+
+		return self.rpc("infrastructure_ansible_inventory_get", arrParams)
+
+
+	def jwt_session_cookies_types_to_cookies_names(self):
+
+		arrParams = [
+		]
+
+		return self.rpc("jwt_session_cookies_types_to_cookies_names", arrParams)
+
+
+	def subnet_prefix_sizes_wan_cluster_attached(self, strSubnetType):
+
+		arrParams = [
+			strSubnetType,
+		]
+
+		return self.rpc("subnet_prefix_sizes_wan_cluster_attached", arrParams)
 
 

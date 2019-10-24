@@ -38,6 +38,11 @@ class VolumeTemplate(object):
 	volume_template_local_disk_supported = False;
 
 	"""
+	A set of all supported methods
+	"""
+	volume_template_boot_methods_supported = "pxe_iscsi";
+
+	"""
 	An arbitrary UTF-8 string which provides a description of the template.
 	"""
 	volume_template_description = "";

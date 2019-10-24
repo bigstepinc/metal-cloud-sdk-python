@@ -14,7 +14,7 @@ class BSIClient(object):
         # The API key can be found in the interface by accessing myBigstep > Metal Cloud > API credentials
         strAPIKey = "00:pl34s3c0pyth34p1k3yfr0mth3bs14dm1n1nt3rf4c3"
         dictParams = {
-            "strJSONRPCRouterURL": "https://fullmetal.bigstep.com/api"
+            "strJSONRPCRouterURL": "https://api.bigstep.com/metal-cloud"
         }
 
         """

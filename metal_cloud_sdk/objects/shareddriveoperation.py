@@ -8,10 +8,9 @@ class SharedDriveOperation(object):
 	operation object.
 	"""
 
-	def __init__(self, shared_drive_label, shared_drive_size_mbytes, shared_drive_storage_type, shared_drive_change_id):
+	def __init__(self, shared_drive_label, shared_drive_size_mbytes, shared_drive_change_id):
 		self.shared_drive_label = shared_drive_label;
 		self.shared_drive_size_mbytes = shared_drive_size_mbytes;
-		self.shared_drive_storage_type = shared_drive_storage_type;
 		self.shared_drive_change_id = shared_drive_change_id;
 
 

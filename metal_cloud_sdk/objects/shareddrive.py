@@ -38,9 +38,9 @@ class SharedDrive(object):
 	shared_drive_size_mbytes = 2048;
 
 	"""
-	Represents the SharedDrive’s type of storage.
+	The storage type of the SharedDrive.
 	"""
-	shared_drive_storage_type = "iscsi_ssd";
+	shared_drive_storage_type = None;
 
 	"""
 	This feature is no longer available. The flag is ignored. Indicates if the
