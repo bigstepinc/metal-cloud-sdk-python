@@ -1,1 +1,1 @@
-# metal-cloud-sdk-python
+Python client for the MetalCloud infrastructure.
