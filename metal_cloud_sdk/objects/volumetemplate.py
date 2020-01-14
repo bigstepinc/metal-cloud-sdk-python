@@ -38,6 +38,11 @@ class VolumeTemplate(object):
 	volume_template_local_disk_supported = False;
 
 	"""
+	Wether the template is an OS template.
+	"""
+	volume_template_is_os_template = False;
+
+	"""
 	A set of all supported methods
 	"""
 	volume_template_boot_methods_supported = "pxe_iscsi";
@@ -72,6 +77,26 @@ class VolumeTemplate(object):
 	The deprecation status of the volume template.
 	"""
 	volume_template_deprecation_status = "not_deprecated";
+
+	"""
+	PCX86 bootloader used for the local install of OS templates.
+	"""
+	os_asset_id_bootloader_c0_pcx86_local_install = None;
+
+	"""
+	PCX86 bootloader used for the OS boot of OS templates.
+	"""
+	os_asset_id_bootloader_c0_pcx86_os_boot = None;
+
+	"""
+	EFI bootloader used for the local install of OS templates.
+	"""
+	os_asset_id_bootloader_c7_efi_local_install = None;
+
+	"""
+	EFI bootloader used for the OS boot of OS templates.
+	"""
+	os_asset_id_bootloader_c7_efi_os_boot = None;
 
 	"""
 	The schema type.

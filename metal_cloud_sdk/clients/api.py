@@ -25,7 +25,7 @@ class API(Client):
 		return API.__instance
 
 
-	""" 250 functions available on endpoint. """
+	""" 282 functions available on endpoint. """
 
 	def cluster_create(self, strInfrastructureID, objCluster):
 
@@ -897,7 +897,7 @@ class API(Client):
 
 		return Deserializer.deserialize(self.rpc("instance_array_get", arrParams))
 
-	def instance_array_edit(self, strInstanceArrayID, objInstanceArrayOperation, bSwapExistingInstancesHardware = False, bKeepDetachingDrives = None, objServerTypeMatches = None, arrInstancesToBeDeleted = None):
+	def instance_array_edit(self, strInstanceArrayID, objInstanceArrayOperation, bSwapExistingInstancesHardware = False, bKeepDetachingDrives = None, objServerTypeMatches = None, arrInstanceIDsPreferredForDelete = None):
 
 		objInstanceArrayOperation = Serializer.serialize(objInstanceArrayOperation)
 		objServerTypeMatches = Serializer.serialize(objServerTypeMatches)
@@ -908,7 +908,7 @@ class API(Client):
 			bSwapExistingInstancesHardware,
 			bKeepDetachingDrives,
 			objServerTypeMatches,
-			arrInstancesToBeDeleted,
+			arrInstanceIDsPreferredForDelete,
 		]
 
 		return Deserializer.deserialize(self.rpc("instance_array_edit", arrParams))
@@ -2423,7 +2423,7 @@ class API(Client):
 		return self.rpc("instance_rows", arrParams)
 
 
-	def independent_instance_create(self, strUserIDOwner, strLabel, strDatacenterName, strServerTypeID, arrFirewallRules = [], strStorageType = "none", nStorageSizeMBytes = 0, strVolumeTemplateID = None):
+	def independent_instance_create(self, strUserIDOwner, strLabel, strDatacenterName, strServerTypeID, arrFirewallRules = [], strISCSIStorageType = "none", nISCSIStorageSizeMBytes = 0, strVolumeTemplateID = None):
 
 		arrFirewallRules = Serializer.serialize(arrFirewallRules)
 
@@ -2433,8 +2433,8 @@ class API(Client):
 			strDatacenterName,
 			strServerTypeID,
 			arrFirewallRules,
-			strStorageType,
-			nStorageSizeMBytes,
+			strISCSIStorageType,
+			nISCSIStorageSizeMBytes,
 			strVolumeTemplateID,
 		]
 
@@ -2448,11 +2448,11 @@ class API(Client):
 
 		return Deserializer.deserialize(self.rpc("independent_instance_delete", arrParams))
 
-	def independent_instance_storage_expand(self, strInstanceID, nStorageSizeMBytes):
+	def independent_instance_storage_expand(self, strInstanceID, nISCSIStorageSizeMBytes):
 
 		arrParams = [
 			strInstanceID,
-			nStorageSizeMBytes,
+			nISCSIStorageSizeMBytes,
 		]
 
 		return Deserializer.deserialize(self.rpc("independent_instance_storage_expand", arrParams))
@@ -2504,6 +2504,14 @@ class API(Client):
 		return self.rpc("subnet_prefix_sizes_wan_cluster_attached", arrParams)
 
 
+	def instance_array_interface_create(self, strInstanceArrayID):
+
+		arrParams = [
+			strInstanceArrayID,
+		]
+
+		return Deserializer.deserialize(self.rpc("instance_array_interface_create", arrParams))
+
 	def infrastructure_ansible_inventory_get(self, strInstanceArrayID):
 
 		arrParams = [
@@ -2513,11 +2521,325 @@ class API(Client):
 		return self.rpc("infrastructure_ansible_inventory_get", arrParams)
 
 
-	def instance_array_interface_create(self, strInstanceArrayID):
+	def infrastructure_ansible_bundles(self, strInfrastructureID, strAnsibleBundleType):
 
 		arrParams = [
-			strInstanceArrayID,
+			strInfrastructureID,
+			strAnsibleBundleType,
 		]
 
-		return Deserializer.deserialize(self.rpc("instance_array_interface_create", arrParams))
+		return self.rpc("infrastructure_ansible_bundles", arrParams)
+
+
+	def infrastructure_ansible_bundle_add_into_runlevel(self, strInfrastructureID, nAnsibleBundleID, nRunLevel):
+
+		arrParams = [
+			strInfrastructureID,
+			nAnsibleBundleID,
+			nRunLevel,
+		]
+
+		return Deserializer.deserialize(self.rpc("infrastructure_ansible_bundle_add_into_runlevel", arrParams))
+
+	def infrastructure_ansible_bundle_move_into_runlevel(self, strInfrastructureID, nAnsibleBundleID, nSourceRunLevel, nDestinationRunLevel):
+
+		arrParams = [
+			strInfrastructureID,
+			nAnsibleBundleID,
+			nSourceRunLevel,
+			nDestinationRunLevel,
+		]
+
+		self.rpc("infrastructure_ansible_bundle_move_into_runlevel", arrParams)
+
+
+	def infrastructure_ansible_bundle_delete_from_runlevel(self, strInfrastructureID, nAnsibleBundleID, nRunLevel):
+
+		arrParams = [
+			strInfrastructureID,
+			nAnsibleBundleID,
+			nRunLevel,
+		]
+
+		self.rpc("infrastructure_ansible_bundle_delete_from_runlevel", arrParams)
+
+
+	def ansible_bundles(self, strUserID):
+
+		arrParams = [
+			strUserID,
+		]
+
+		objAnsibleBundle = self.rpc("ansible_bundles", arrParams)
+		for strKeyAnsibleBundle in objAnsibleBundle:
+			objAnsibleBundle[strKeyAnsibleBundle] = Deserializer.deserialize(objAnsibleBundle[strKeyAnsibleBundle])
+		return objAnsibleBundle
+
+	def infrastructure_ansible_bundle_exec(self, strInfrastructureID, nInfrastructureAnsibleBundleID, objExtraAnsibleVariables = []):
+
+		objExtraAnsibleVariables = Serializer.serialize(objExtraAnsibleVariables)
+
+		arrParams = [
+			strInfrastructureID,
+			nInfrastructureAnsibleBundleID,
+			objExtraAnsibleVariables,
+		]
+
+		return self.rpc("infrastructure_ansible_bundle_exec", arrParams)
+
+
+	def ansible_bundle_get(self, nAnsibleBundleID):
+
+		arrParams = [
+			nAnsibleBundleID,
+		]
+
+		return Deserializer.deserialize(self.rpc("ansible_bundle_get", arrParams))
+
+	def ansible_bundle_create(self, strUserID, objAnsibleBundle):
+
+		objAnsibleBundle = Serializer.serialize(objAnsibleBundle)
+
+		arrParams = [
+			strUserID,
+			objAnsibleBundle,
+		]
+
+		return Deserializer.deserialize(self.rpc("ansible_bundle_create", arrParams))
+
+	def ansible_bundle_update(self, nAnsibleBundleID, objAnsibleBundle):
+
+		objAnsibleBundle = Serializer.serialize(objAnsibleBundle)
+
+		arrParams = [
+			nAnsibleBundleID,
+			objAnsibleBundle,
+		]
+
+		return Deserializer.deserialize(self.rpc("ansible_bundle_update", arrParams))
+
+	def ansible_bundle_delete(self, nAnsibleBundleID):
+
+		arrParams = [
+			nAnsibleBundleID,
+		]
+
+		self.rpc("ansible_bundle_delete", arrParams)
+
+
+	def secrets(self, strUserID, strUsage = None):
+
+		arrParams = [
+			strUserID,
+			strUsage,
+		]
+
+		objSecret = self.rpc("secrets", arrParams)
+		for strKeySecret in objSecret:
+			objSecret[strKeySecret] = Deserializer.deserialize(objSecret[strKeySecret])
+		return objSecret
+
+	def secret_get(self, nSecretID):
+
+		arrParams = [
+			nSecretID,
+		]
+
+		return Deserializer.deserialize(self.rpc("secret_get", arrParams))
+
+	def secret_create(self, strUserID, objSecret):
+
+		objSecret = Serializer.serialize(objSecret)
+
+		arrParams = [
+			strUserID,
+			objSecret,
+		]
+
+		return Deserializer.deserialize(self.rpc("secret_create", arrParams))
+
+	def secret_update(self, nSecretID, objSecret):
+
+		objSecret = Serializer.serialize(objSecret)
+
+		arrParams = [
+			nSecretID,
+			objSecret,
+		]
+
+		return Deserializer.deserialize(self.rpc("secret_update", arrParams))
+
+	def secret_delete(self, nSecretID):
+
+		arrParams = [
+			nSecretID,
+		]
+
+		self.rpc("secret_delete", arrParams)
+
+
+	def infrastructure_refresh_usage_stats(self, strInfrastructureID):
+
+		arrParams = [
+			strInfrastructureID,
+		]
+
+		return Deserializer.deserialize(self.rpc("infrastructure_refresh_usage_stats", arrParams))
+
+	def os_asset_assign_to_os_template(self, nOSAssetID, strVolumeTemplateID):
+
+		arrParams = [
+			nOSAssetID,
+			strVolumeTemplateID,
+		]
+
+		return self.rpc("os_asset_assign_to_os_template", arrParams)
+
+
+	def os_asset_is_assigned_to_os_template(self, nOSAssetID, strVolumeTemplateID):
+
+		arrParams = [
+			nOSAssetID,
+			strVolumeTemplateID,
+		]
+
+		return self.rpc("os_asset_is_assigned_to_os_template", arrParams)
+
+
+	def os_template_os_assets(self, nVolumeTemplateID):
+
+		arrParams = [
+			nVolumeTemplateID,
+		]
+
+		objOSAsset = self.rpc("os_template_os_assets", arrParams)
+		for strKeyOSAsset in objOSAsset:
+			objOSAsset[strKeyOSAsset] = Deserializer.deserialize(objOSAsset[strKeyOSAsset])
+		return objOSAsset
+
+	def infrastructures_statistics(self):
+
+		arrParams = [
+		]
+
+		return self.rpc("infrastructures_statistics", arrParams)
+
+
+	def subnet_pools_statistics(self):
+
+		arrParams = [
+		]
+
+		return self.rpc("subnet_pools_statistics", arrParams)
+
+
+	def os_asset_create(self, strUserID, objOSAsset):
+
+		objOSAsset = Serializer.serialize(objOSAsset)
+
+		arrParams = [
+			strUserID,
+			objOSAsset,
+		]
+
+		return Deserializer.deserialize(self.rpc("os_asset_create", arrParams))
+
+	def os_assets(self, strUserID, strUserIDOwner = None):
+
+		arrParams = [
+			strUserID,
+			strUserIDOwner,
+		]
+
+		objOSAsset = self.rpc("os_assets", arrParams)
+		for strKeyOSAsset in objOSAsset:
+			objOSAsset[strKeyOSAsset] = Deserializer.deserialize(objOSAsset[strKeyOSAsset])
+		return objOSAsset
+
+	def os_asset_get(self, nOSAssetID):
+
+		arrParams = [
+			nOSAssetID,
+		]
+
+		return Deserializer.deserialize(self.rpc("os_asset_get", arrParams))
+
+	def os_asset_update(self, nOSAssetID, objOSAsset):
+
+		objOSAsset = Serializer.serialize(objOSAsset)
+
+		arrParams = [
+			nOSAssetID,
+			objOSAsset,
+		]
+
+		return Deserializer.deserialize(self.rpc("os_asset_update", arrParams))
+
+	def os_asset_delete(self, nOSAssetID):
+
+		arrParams = [
+			nOSAssetID,
+		]
+
+		self.rpc("os_asset_delete", arrParams)
+
+
+	def os_asset_get_stored_content(self, nOSAssetID):
+
+		arrParams = [
+			nOSAssetID,
+		]
+
+		return self.rpc("os_asset_get_stored_content", arrParams)
+
+
+	def os_template_create(self, strUserID, objOSTemplate):
+
+		objOSTemplate = Serializer.serialize(objOSTemplate)
+
+		arrParams = [
+			strUserID,
+			objOSTemplate,
+		]
+
+		return Deserializer.deserialize(self.rpc("os_template_create", arrParams))
+
+	def os_templates(self, strUserID):
+
+		arrParams = [
+			strUserID,
+		]
+
+		objVolumeTemplate = self.rpc("os_templates", arrParams)
+		for strKeyVolumeTemplate in objVolumeTemplate:
+			objVolumeTemplate[strKeyVolumeTemplate] = Deserializer.deserialize(objVolumeTemplate[strKeyVolumeTemplate])
+		return objVolumeTemplate
+
+	def os_template_get(self, strVolumeTemplateID):
+
+		arrParams = [
+			strVolumeTemplateID,
+		]
+
+		return Deserializer.deserialize(self.rpc("os_template_get", arrParams))
+
+	def os_template_update(self, strVolumeTemplateID, objOSTemplate):
+
+		objOSTemplate = Serializer.serialize(objOSTemplate)
+
+		arrParams = [
+			strVolumeTemplateID,
+			objOSTemplate,
+		]
+
+		return Deserializer.deserialize(self.rpc("os_template_update", arrParams))
+
+	def os_template_delete(self, strVolumeTemplateID):
+
+		arrParams = [
+			strVolumeTemplateID,
+		]
+
+		self.rpc("os_template_delete", arrParams)
+
 

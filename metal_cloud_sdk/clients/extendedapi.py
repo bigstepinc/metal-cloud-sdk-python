@@ -25,7 +25,7 @@ class ExtendedAPI(Client):
 		return ExtendedAPI.__instance
 
 
-	""" 281 functions available on endpoint. """
+	""" 295 functions available on endpoint. """
 
 	def cluster_create(self, strInfrastructureID, objCluster):
 
@@ -109,16 +109,6 @@ class ExtendedAPI(Client):
 		for strKeyDatacenter in objDatacenter:
 			objDatacenter[strKeyDatacenter] = Deserializer.deserialize(objDatacenter[strKeyDatacenter])
 		return objDatacenter
-
-	def events_delete(self, strInfrastructureID, arrEventIDs):
-
-		arrParams = [
-			strInfrastructureID,
-			arrEventIDs,
-		]
-
-		self.rpc("events_delete", arrParams)
-
 
 	def infrastructure_create(self, strUserID, objInfrastructure, strInfrastructureIDAsTemplate = None):
 
@@ -337,7 +327,7 @@ class ExtendedAPI(Client):
 
 		return Deserializer.deserialize(self.rpc("instance_array_create", arrParams))
 
-	def instance_array_edit(self, strInstanceArrayID, objInstanceArrayOperation, bSwapExistingInstancesHardware = False, bKeepDetachingDrives = None, objServerTypeMatches = None, arrInstancesToBeDeleted = None):
+	def instance_array_edit(self, strInstanceArrayID, objInstanceArrayOperation, bSwapExistingInstancesHardware = False, bKeepDetachingDrives = None, objServerTypeMatches = None, arrInstanceIDsPreferredForDelete = None):
 
 		objInstanceArrayOperation = Serializer.serialize(objInstanceArrayOperation)
 		objServerTypeMatches = Serializer.serialize(objServerTypeMatches)
@@ -348,7 +338,7 @@ class ExtendedAPI(Client):
 			bSwapExistingInstancesHardware,
 			bKeepDetachingDrives,
 			objServerTypeMatches,
-			arrInstancesToBeDeleted,
+			arrInstanceIDsPreferredForDelete,
 		]
 
 		return Deserializer.deserialize(self.rpc("instance_array_edit", arrParams))
@@ -2783,7 +2773,7 @@ class ExtendedAPI(Client):
 		return self.rpc("subnet_prefix_sizes_wan", arrParams)
 
 
-	def independent_instance_create(self, strUserIDOwner, strLabel, strDatacenterName, strServerTypeID, arrFirewallRules = [], strStorageType = "none", nStorageSizeMBytes = 0, strVolumeTemplateID = None):
+	def independent_instance_create(self, strUserIDOwner, strLabel, strDatacenterName, strServerTypeID, arrFirewallRules = [], strISCSIStorageType = "none", nISCSIStorageSizeMBytes = 0, strVolumeTemplateID = None):
 
 		arrFirewallRules = Serializer.serialize(arrFirewallRules)
 
@@ -2793,8 +2783,8 @@ class ExtendedAPI(Client):
 			strDatacenterName,
 			strServerTypeID,
 			arrFirewallRules,
-			strStorageType,
-			nStorageSizeMBytes,
+			strISCSIStorageType,
+			nISCSIStorageSizeMBytes,
 			strVolumeTemplateID,
 		]
 
@@ -2828,11 +2818,11 @@ class ExtendedAPI(Client):
 
 		return Deserializer.deserialize(self.rpc("independent_instance_delete", arrParams))
 
-	def independent_instance_storage_expand(self, strInstanceID, nStorageSizeMBytes):
+	def independent_instance_storage_expand(self, strInstanceID, nISCSIStorageSizeMBytes):
 
 		arrParams = [
 			strInstanceID,
-			nStorageSizeMBytes,
+			nISCSIStorageSizeMBytes,
 		]
 
 		return Deserializer.deserialize(self.rpc("independent_instance_storage_expand", arrParams))
@@ -2880,5 +2870,162 @@ class ExtendedAPI(Client):
 		]
 
 		return self.rpc("subnet_prefix_sizes_wan_cluster_attached", arrParams)
+
+
+	def infrastructure_ansible_bundles(self, strInfrastructureID, strAnsibleBundleType):
+
+		arrParams = [
+			strInfrastructureID,
+			strAnsibleBundleType,
+		]
+
+		return self.rpc("infrastructure_ansible_bundles", arrParams)
+
+
+	def infrastructure_ansible_bundle_delete_from_runlevel(self, strInfrastructureID, nAnsibleBundleID, nRunLevel):
+
+		arrParams = [
+			strInfrastructureID,
+			nAnsibleBundleID,
+			nRunLevel,
+		]
+
+		self.rpc("infrastructure_ansible_bundle_delete_from_runlevel", arrParams)
+
+
+	def infrastructure_ansible_bundle_add_into_runlevel(self, strInfrastructureID, nAnsibleBundleID, nRunLevel):
+
+		arrParams = [
+			strInfrastructureID,
+			nAnsibleBundleID,
+			nRunLevel,
+		]
+
+		return Deserializer.deserialize(self.rpc("infrastructure_ansible_bundle_add_into_runlevel", arrParams))
+
+	def ansible_bundles(self, strUserID):
+
+		arrParams = [
+			strUserID,
+		]
+
+		objAnsibleBundle = self.rpc("ansible_bundles", arrParams)
+		for strKeyAnsibleBundle in objAnsibleBundle:
+			objAnsibleBundle[strKeyAnsibleBundle] = Deserializer.deserialize(objAnsibleBundle[strKeyAnsibleBundle])
+		return objAnsibleBundle
+
+	def ansible_bundle_update(self, nAnsibleBundleID, objAnsibleBundle):
+
+		objAnsibleBundle = Serializer.serialize(objAnsibleBundle)
+
+		arrParams = [
+			nAnsibleBundleID,
+			objAnsibleBundle,
+		]
+
+		return Deserializer.deserialize(self.rpc("ansible_bundle_update", arrParams))
+
+	def ansible_bundle_get(self, nAnsibleBundleID):
+
+		arrParams = [
+			nAnsibleBundleID,
+		]
+
+		return Deserializer.deserialize(self.rpc("ansible_bundle_get", arrParams))
+
+	def ansible_bundle_delete(self, nAnsibleBundleID):
+
+		arrParams = [
+			nAnsibleBundleID,
+		]
+
+		self.rpc("ansible_bundle_delete", arrParams)
+
+
+	def ansible_bundle_create(self, strUserID, objAnsibleBundle):
+
+		objAnsibleBundle = Serializer.serialize(objAnsibleBundle)
+
+		arrParams = [
+			strUserID,
+			objAnsibleBundle,
+		]
+
+		return Deserializer.deserialize(self.rpc("ansible_bundle_create", arrParams))
+
+	def infrastructure_ansible_bundle_move_into_runlevel(self, strInfrastructureID, nAnsibleBundleID, nSourceRunLevel, nDestinationRunLevel):
+
+		arrParams = [
+			strInfrastructureID,
+			nAnsibleBundleID,
+			nSourceRunLevel,
+			nDestinationRunLevel,
+		]
+
+		self.rpc("infrastructure_ansible_bundle_move_into_runlevel", arrParams)
+
+
+	def infrastructure_ansible_bundle_exec(self, strInfrastructureID, nInfrastructureAnsibleBundleID, objExtraAnsibleVariables = []):
+
+		objExtraAnsibleVariables = Serializer.serialize(objExtraAnsibleVariables)
+
+		arrParams = [
+			strInfrastructureID,
+			nInfrastructureAnsibleBundleID,
+			objExtraAnsibleVariables,
+		]
+
+		return self.rpc("infrastructure_ansible_bundle_exec", arrParams)
+
+
+	def secrets(self, strUserID, strUsage = None):
+
+		arrParams = [
+			strUserID,
+			strUsage,
+		]
+
+		objSecret = self.rpc("secrets", arrParams)
+		for strKeySecret in objSecret:
+			objSecret[strKeySecret] = Deserializer.deserialize(objSecret[strKeySecret])
+		return objSecret
+
+	def secret_get(self, nSecretID):
+
+		arrParams = [
+			nSecretID,
+		]
+
+		return Deserializer.deserialize(self.rpc("secret_get", arrParams))
+
+	def secret_create(self, strUserID, objSecret):
+
+		objSecret = Serializer.serialize(objSecret)
+
+		arrParams = [
+			strUserID,
+			objSecret,
+		]
+
+		return Deserializer.deserialize(self.rpc("secret_create", arrParams))
+
+	def secret_update(self, nSecretID, objSecret):
+
+		objSecret = Serializer.serialize(objSecret)
+
+		arrParams = [
+			nSecretID,
+			objSecret,
+		]
+
+		return Deserializer.deserialize(self.rpc("secret_update", arrParams))
+
+	def secret_delete(self, nSecretID):
+
+		arrParams = [
+			nSecretID,
+		]
+
+		self.rpc("secret_delete", arrParams)
 
 

@@ -5,13 +5,18 @@ class AppKubernetes(object):
 	Kubernetes cluster.
 	"""
 
-	def __init__(self, kubernetes_nodes):
+	def __init__(self, kubernetes_nodes, kubernetes_master):
 		self.kubernetes_nodes = kubernetes_nodes;
+		self.kubernetes_master = kubernetes_master;
 
 
 	"""
 	"""
 	kubernetes_nodes = [];
+
+	"""
+	"""
+	kubernetes_master = [];
 
 	"""
 	The admin username on the cluster.

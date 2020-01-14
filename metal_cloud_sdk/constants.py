@@ -5,7 +5,7 @@ import importlib
 class Constants(object):
 
 	"""
-	* Metal Cloud, API v3.2.0
+	* Metal Cloud, API v2.7.8
 	"""
 	AFC_GROUP_TYPE_INFRASTRUCTURE_DEPLOYMENT="infrastructure_deployment"
 	AFC_GROUP_TYPE_SERVER_CLEANUP="server_cleanup"
@@ -24,6 +24,8 @@ class Constants(object):
 	AFC_TYPE_ASYNCHRONOUS="asynchronous"
 	AFC_TYPE_DEBUG_NORMAL="debug_normal"
 	AFC_TYPE_DEBUG_RPC_SERVER="debug_rpc_server"
+	ANSIBLE_RUN_POST_DEPLOY="post_deploy"
+	ANSIBLE_RUN_PRE_DEPLOY="pre_deploy"
 	CLUSTER_TYPE_CLOUDERA="cloudera"
 	CLUSTER_TYPE_CONTAINER_PLATFORM_KUBERNETES="container_platform_kubernetes"
 	CLUSTER_TYPE_CONTAINER_PLATFORM_MESOS="container_platform_mesos"
@@ -71,6 +73,7 @@ class Constants(object):
 	CONTAINER_STATUS_PHASE_SUCCEEDED="succeeded"
 	CONTAINER_STATUS_PHASE_UNKNOWN="unknown"
 	DATA_LAKE_TYPE_HDFS="hdfs"
+	DISK_TYPE_AUTO="auto"
 	DISK_TYPE_HDD="HDD"
 	DISK_TYPE_NONE="none"
 	DISK_TYPE_NVME="NVME"
@@ -83,6 +86,7 @@ class Constants(object):
 	DNS_RECORD_TYPE_PTR="PTR"
 	DNS_RECORD_TYPE_SOA="SOA"
 	DNS_RECORD_TYPE_TXT="TXT"
+	DRIVE_STORAGE_TYPE_AUTO="auto"
 	DRIVE_STORAGE_TYPE_DUMMY="dummy"
 	DRIVE_STORAGE_TYPE_ISCSI_HDD="iscsi_hdd"
 	DRIVE_STORAGE_TYPE_ISCSI_SSD="iscsi_ssd"
@@ -230,6 +234,7 @@ class Constants(object):
 	SERVER_STATUS_REGISTERING="registering"
 	SERVER_STATUS_REMOVED_FROM_RACK="removed_from_rack"
 	SERVER_STATUS_UNAVAILABLE="unavailable"
+	SERVER_STATUS_UPDATING_FIRMWARE="updating_firmware"
 	SERVER_STATUS_USED="used"
 	SERVER_STATUS_USED_REGISTERING="used_registering"
 	SERVER_TYPE_BOOT_HYBRID_DEFAULT_LEGACY="hybrid_default_legacy"
@@ -301,9 +306,15 @@ class Constants(object):
 	USER_TEST_ACCOUNT_KEYWORD="_erasable_"
 	USER_TYPE_ADMIN="admin"
 	USER_TYPE_BILLABLE="billable"
+	VOLUME_TEMPLATE_ANSIBLE_BUNDLE_LOCAL_INSTALLER="ansible_bundle_local_installer"
+	VOLUME_TEMPLATE_ANSIBLE_BUNDLE_OS_BOOT_POST_INSTALL="ansible_bundle_os_boot_post_install"
 	VOLUME_TEMPLATE_BOOT_HYBRID="hybrid"
 	VOLUME_TEMPLATE_BOOT_LEGACY_ONLY="legacy_only"
 	VOLUME_TEMPLATE_BOOT_UEFI_ONLY="uefi_only"
+	VOLUME_TEMPLATE_BOOTLOADER_EFI_LOCAL_INSTALL="bootloader_c7_efi_local_install"
+	VOLUME_TEMPLATE_BOOTLOADER_EFI_OS_BOOT="bootloader_c7_efi_os_boot"
+	VOLUME_TEMPLATE_BOOTLOADER_PCX86_LOCAL_INSTALL="bootloader_c0_pcx86_local_install"
+	VOLUME_TEMPLATE_BOOTLOADER_PCX86_OS_BOOT="bootloader_c0_pcx86_os_boot"
 	VOLUME_TEMPLATE_DEPRECATION_STATUS_DEPRECATED_ALLOW_EXPAND="deprecated_allow_expand"
 	VOLUME_TEMPLATE_DEPRECATION_STATUS_DEPRECATED_DENY_PROVISION="deprecated_deny_provision"
 	VOLUME_TEMPLATE_DEPRECATION_STATUS_NOT_DEPRECATED="not_deprecated"
@@ -412,6 +423,18 @@ class Constants(object):
 				'description':'',
 				'value_json':'"debug_rpc_server"',
 				'visibility':'private',
+			},
+		ANSIBLE_RUN_POST_DEPLOY:{
+				'title':'Run the Ansible bundle at the end of a deploy',
+				'description':'',
+				'value_json':'"post_deploy"',
+				'visibility':'public',
+			},
+		ANSIBLE_RUN_PRE_DEPLOY:{
+				'title':'Run the Ansible bundle before a deploy starts',
+				'description':'Useful in cases such as rebalancing a cluster before removing healthy nodes.',
+				'value_json':'"pre_deploy"',
+				'visibility':'public',
 			},
 		CLUSTER_TYPE_CLOUDERA:{
 				'title':'SaaS cluster of type Cloudera',
@@ -695,6 +718,12 @@ class Constants(object):
 				'value_json':'"hdfs"',
 				'visibility':'public',
 			},
+		DISK_TYPE_AUTO:{
+				'title':'Automatically pick a disk type',
+				'description':'',
+				'value_json':'"auto"',
+				'visibility':'public',
+			},
 		DISK_TYPE_HDD:{
 				'title':'Disk Type HDD',
 				'description':'Type of server local disk',
@@ -766,6 +795,12 @@ class Constants(object):
 				'description':'Originally for arbitrary human-readable text in a DNS record. Since the early 1990s, however, this record more often carries machine-readable data, such as specified by RFC 1464, opportunistic encryption, Sender Policy Framework, DKIM, DMARC, DNS-SD, etc.',
 				'value_json':'"TXT"',
 				'visibility':'private',
+			},
+		DRIVE_STORAGE_TYPE_AUTO:{
+				'title':'Automatically pick a drive storage type',
+				'description':'',
+				'value_json':'"auto"',
+				'visibility':'public',
 			},
 		DRIVE_STORAGE_TYPE_DUMMY:{
 				'title':'Dummy drive',
@@ -1651,6 +1686,12 @@ class Constants(object):
 				'value_json':'"unavailable"',
 				'visibility':'private',
 			},
+		SERVER_STATUS_UPDATING_FIRMWARE:{
+				'title':'Server is updating the firmware of one or more components.',
+				'description':'Server is updating the firmware of one or more components.',
+				'value_json':'"updating_firmware"',
+				'visibility':'private',
+			},
 		SERVER_STATUS_USED:{
 				'title':'Used server',
 				'description':'',
@@ -2077,6 +2118,18 @@ class Constants(object):
 				'value_json':'"billable"',
 				'visibility':'public',
 			},
+		VOLUME_TEMPLATE_ANSIBLE_BUNDLE_LOCAL_INSTALLER:{
+				'title':'Volume template ansible bundle local installer',
+				'description':'Ansible bundle for local install.',
+				'value_json':'"ansible_bundle_local_installer"',
+				'visibility':'public',
+			},
+		VOLUME_TEMPLATE_ANSIBLE_BUNDLE_OS_BOOT_POST_INSTALL:{
+				'title':'Volume template ansible bundle OS boot post install.',
+				'description':'Ansible bundle for OS boot post install.',
+				'value_json':'"ansible_bundle_os_boot_post_install"',
+				'visibility':'public',
+			},
 		VOLUME_TEMPLATE_BOOT_HYBRID:{
 				'title':'Volume template boots hybrid, both legacy and UEFI',
 				'description':'',
@@ -2094,6 +2147,30 @@ class Constants(object):
 				'description':'',
 				'value_json':'"uefi_only"',
 				'visibility':'private',
+			},
+		VOLUME_TEMPLATE_BOOTLOADER_EFI_LOCAL_INSTALL:{
+				'title':'Volume template bootloader EFI local install',
+				'description':'',
+				'value_json':'"bootloader_c7_efi_local_install"',
+				'visibility':'public',
+			},
+		VOLUME_TEMPLATE_BOOTLOADER_EFI_OS_BOOT:{
+				'title':'Volume template bootloader EFI OS boot',
+				'description':'EFI bootloader for OS boot.',
+				'value_json':'"bootloader_c7_efi_os_boot"',
+				'visibility':'public',
+			},
+		VOLUME_TEMPLATE_BOOTLOADER_PCX86_LOCAL_INSTALL:{
+				'title':'Volume template bootloader PCX86 local install',
+				'description':'PCX86 bootloader for local install.',
+				'value_json':'"bootloader_c0_pcx86_local_install"',
+				'visibility':'public',
+			},
+		VOLUME_TEMPLATE_BOOTLOADER_PCX86_OS_BOOT:{
+				'title':'Volume template bootloader PCX86 OS boot',
+				'description':'PCX86 bootloader for OS boot.',
+				'value_json':'"bootloader_c0_pcx86_os_boot"',
+				'visibility':'public',
 			},
 		VOLUME_TEMPLATE_DEPRECATION_STATUS_DEPRECATED_ALLOW_EXPAND:{
 				'title':'Volume template deprecation status deprecated allow expand',

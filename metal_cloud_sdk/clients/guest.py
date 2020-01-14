@@ -324,7 +324,7 @@ class Guest(Client):
 
 		return Deserializer.deserialize(self.rpc("instance_array_create", arrParams))
 
-	def instance_array_edit(self, strInstanceArrayID, objInstanceArrayOperation, bSwapExistingInstancesHardware = False, bKeepDetachingDrives = None, objServerTypeMatches = None, arrInstancesToBeDeleted = None):
+	def instance_array_edit(self, strInstanceArrayID, objInstanceArrayOperation, bSwapExistingInstancesHardware = False, bKeepDetachingDrives = None, objServerTypeMatches = None, arrInstanceIDsPreferredForDelete = None):
 
 		objInstanceArrayOperation = Serializer.serialize(objInstanceArrayOperation)
 		objServerTypeMatches = Serializer.serialize(objServerTypeMatches)
@@ -335,7 +335,7 @@ class Guest(Client):
 			bSwapExistingInstancesHardware,
 			bKeepDetachingDrives,
 			objServerTypeMatches,
-			arrInstancesToBeDeleted,
+			arrInstanceIDsPreferredForDelete,
 		]
 
 		return Deserializer.deserialize(self.rpc("instance_array_edit", arrParams))

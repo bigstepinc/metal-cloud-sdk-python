@@ -1,10 +1,19 @@
 
 """
-* Metal Cloud, API v3.2.0"""
+* Metal Cloud, API v2.7.8"""
 
 class ApiException(Exception):
 
 	
+
+	"""
+	Ansible bundle not found.
+	@public
+	
+	.
+	"""
+	ANSIBLE_BUNDLE_NOT_FOUND=330
+
 
 	"""
 	API key mismatch.
@@ -996,6 +1005,15 @@ class ApiException(Exception):
 
 
 	"""
+	OS asset not found.
+	@public
+	
+	.
+	"""
+	OS_ASSET_NOT_FOUND=333
+
+
+	"""
 	OS bootstrap failed.
 	@private
 	
@@ -1172,6 +1190,15 @@ class ApiException(Exception):
 	The specified resource reservation was not found in the database.
 	"""
 	RESOURCE_RESERVATION_NOT_FOUND=266
+
+
+	"""
+	Secret not found.
+	@public
+	
+	.
+	"""
+	SECRET_NOT_FOUND=332
 
 
 	"""
@@ -1382,6 +1409,15 @@ class ApiException(Exception):
 
 
 	"""
+	SSH key pair not set.
+	@private
+	
+	.
+	"""
+	SSH_KEY_PAIR_NOT_SET=331
+
+
+	"""
 	Unknown SSH key format.
 	@public
 	
@@ -1448,7 +1484,7 @@ class ApiException(Exception):
 	Volume template not found.
 	@public
 	
-	This error is thrown when an attempt to retrieve or use a volume template is made, but the specified volume template is not found in storage. API clients that receive this error should make the volume template public or use volume_templates() to obtain a list of available templates before trying again.
+	This error is thrown when an attempt to retrieve or use a volume template is made, but the specified volume template is not found on the storage. API clients that receive this error should obtain a list of available templates using volume_templates() before trying again.
 	"""
 	STORAGE_VOLUME_TEMPLATE_NOT_FOUND=68
 
@@ -1951,6 +1987,7 @@ class ApiException(Exception):
 		SERVER_NOT_RESERVED,
 		SERVER_RESERVED,
 		SERVER_UUID_NOT_FOUND,
+		SSH_KEY_PAIR_NOT_SET,
 		STORAGE_POOL_DESTINATION_SAME_AS_SOURCE,
 		STORAGE_POOL_NOT_ENOUGH_FREE_SPACE,
 		STORAGE_POOL_NOT_FOUND,
@@ -1981,6 +2018,7 @@ class ApiException(Exception):
 	* Public error codes are allowed on all endpoints.
 	"""
 	arrPublicErrorIDs=[
+		ANSIBLE_BUNDLE_NOT_FOUND,
 		API_KEY_MISMATCH,
 		API_KEY_NOT_FOUND,
 		AUTHENTICATOR_OTP_REJECTED,
@@ -2064,6 +2102,7 @@ class ApiException(Exception):
 		NOT_IMPLEMENTED,
 		NOTHING_TO_UPDATE,
 		OBJECT_IS_INVALID,
+		OS_ASSET_NOT_FOUND,
 		PARAM_TYPE_MISMATCH,
 		PARAM_VALUE_INVALID,
 		PASSWORD_COMPLEXITY_TOO_LOW,
@@ -2080,6 +2119,7 @@ class ApiException(Exception):
 		PROPERTY_IS_UNKNOWN,
 		PROPERTY_READ_ONLY,
 		RESOURCE_RESERVATION_NOT_FOUND,
+		SECRET_NOT_FOUND,
 		SELECTION_LIMIT_EXCEEDED,
 		SERVER_MIGHT_NOT_BE_READY_FOR_POWER_GET,
 		SERVER_POWER_LOCKED_BY_ONGOING_OPERATION,
